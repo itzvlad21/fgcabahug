@@ -232,6 +232,8 @@ app.use(cors({
         'http://82.29.161.124:3000',
         'http://82.29.161.124',
         'https://fgcabahugtrading.com',
+        'www.fgcabahugtrading.com',
+        'fgcabahugtrading.com',
         'http://192.168.68.121:3000',
         'http://192.168.68.121:5500',
         'http://192.168.68.121:5501',
