@@ -79,7 +79,7 @@ if (!BASE_URL) {
     console.warn('WARNING: BASE_URL not set in environment variables. Using default value.');
 }
 
-const defaultBaseUrl = 'https://fgcabahugtrading.com/';
+const defaultBaseUrl = 'http://82.29.161.124:3000/';
 const baseUrl = BASE_URL || defaultBaseUrl;
 
 // Ensure trailing slash is consistent
@@ -229,6 +229,7 @@ const DB_PATH = path.join(__dirname, 'data', 'database.sqlite');
 // Configure CORS to allow requests from live server
 app.use(cors({
     origin: [
+        'http://82.29.161.124:3000',
         'https://fgcabahugtrading.com',
         'http://192.168.68.121:3000',
         'http://192.168.68.121:5500',
