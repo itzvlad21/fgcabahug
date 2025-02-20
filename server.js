@@ -12,29 +12,14 @@ const multer = require('multer');
 const http = require('http');
 const socketIo = require('socket.io');
 
+
 const server = http.createServer(app);
-const io = socketIo(server, {
-    cors: {
-        origin: [
-            'https://fgcabahugtrading.com',
-            'https://www.fgcabahugtrading.com',
-            'www.fgcabahugtrading.com',
-            'http://www.fgcabahugtrading.com',  
-            'http://localhost:3000'
-        ],
-        methods: ["GET", "POST"],
-        credentials: true
-    }
-});
+const io = socketIo(server);
 
 const activeUsers = new Map();
 const chatHistory = new Map();
 
-const activeTypers = new Map();
-const MAX_HISTORY = 100; // Keep last 100 messages per chat
-
 const bcrypt = require('bcrypt');
-const SALT_ROUNDS = 10; // Standard recommendation
 
 const CAL_API_KEY = 'cal_live_80a4664b1ede141f895c18c8890c4b6c';
 
@@ -81,7 +66,7 @@ const ALLOWED_DOMAINS = [
 
 const passwordResetLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 hour
-    max: 15, // 3 requests per hour
+    max: 3, // 3 requests per hour
     message: { error: 'Too many password reset attempts. Please try again later.' }
 });
 
@@ -91,7 +76,7 @@ if (!BASE_URL) {
     console.warn('WARNING: BASE_URL not set in environment variables. Using default value.');
 }
 
-const defaultBaseUrl = 'http://82.29.161.124:3000';
+const defaultBaseUrl = 'http://192.168.68.121:3000/';
 const baseUrl = BASE_URL || defaultBaseUrl;
 
 // Ensure trailing slash is consistent
@@ -145,15 +130,7 @@ app.use((req, res, next) => {
     }
     next();
   });
-
-  app.use((req, res, next) => {
-    if (req.url.match(/\.(jpg|jpeg|png|gif)$/)) {
-        console.log('Image requested:', req.url);
-    }
-    next();
-});
-
-
+  
 // Security Headers Middleware
 app.use((req, res, next) => {
     // Prevent clickjacking attacks
@@ -231,23 +208,16 @@ async function verifyToken(token) {
     });
 }
 
-async function getChatHistory(roomId) {
-    return chatHistory.get(roomId) || [];
-}
-
 // Create database folder if it doesn't exist
-const DB_PATH = path.join(__dirname, 'data', 'database.sqlite');
+// const DB_PATH = path.join(__dirname, 'data', 'database.sqlite');
+
+const DB_PATH = path.join('/var/www/fgcabahug/data', 'database.sqlite');
+
 
 // Configure CORS to allow requests from live server
 app.use(cors({
     origin: [
-        'http://82.29.161.124:3000',
-        'http://82.29.161.124',
-        'https://fgcabahugtrading.com',
-        'https://fgcabahugtrading.com',
-        'www.fgcabahugtrading.com',
-        'http://fgcabahugtrading.com',
-        'fgcabahugtrading.com',
+        'https://fgcabahugtrading.com', 'https://www.fgcabahugtrading.com',
         'http://192.168.68.121:3000',
         'http://192.168.68.121:5500',
         'http://192.168.68.121:5501',
@@ -264,12 +234,16 @@ app.use(cors({
 // Other middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
-const db = new sqlite3.Database(DB_PATH, (err) => {
+const db = new sqlite3.Database(DB_PATH, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
     if (err) {
         console.error('Error opening database', err);
         return;
     }
+     // Enable WAL mode for better concurrency
+     db.run('PRAGMA journal_mode = WAL');
+     db.run('PRAGMA busy_timeout = 5000');
     console.log('Connected to SQLite database');
 
     // Create tables
