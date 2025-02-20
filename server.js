@@ -221,6 +221,7 @@ const DB_PATH = path.join(__dirname, 'data', 'database.sqlite');
 // Configure CORS to allow requests from live server
 app.use(cors({
     origin: [
+        'https://fgcabahugtrading.com',
         'http://192.168.68.121:3000',
         'http://192.168.68.121:5500',
         'http://192.168.68.121:5501',
