@@ -133,7 +133,15 @@ app.use((req, res, next) => {
     }
     next();
   });
-  
+
+  app.use((req, res, next) => {
+    if (req.url.match(/\.(jpg|jpeg|png|gif)$/)) {
+        console.log('Image requested:', req.url);
+    }
+    next();
+});
+
+
 // Security Headers Middleware
 app.use((req, res, next) => {
     // Prevent clickjacking attacks
