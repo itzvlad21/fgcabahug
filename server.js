@@ -13,7 +13,19 @@ const http = require('http');
 const socketIo = require('socket.io');
 
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+    cors: {
+        origin: [
+            'https://fgcabahugtrading.com',
+            'https://www.fgcabahugtrading.com',
+            'www.fgcabahugtrading.com',
+            'http://www.fgcabahugtrading.com',  
+            'http://localhost:3000'
+        ],
+        methods: ["GET", "POST"],
+        credentials: true
+    }
+});
 
 const activeUsers = new Map();
 const chatHistory = new Map();
