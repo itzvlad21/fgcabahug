@@ -230,6 +230,7 @@ const DB_PATH = path.join(__dirname, 'data', 'database.sqlite');
 app.use(cors({
     origin: [
         'http://82.29.161.124:3000',
+        'http://82.29.161.124',
         'https://fgcabahugtrading.com',
         'http://192.168.68.121:3000',
         'http://192.168.68.121:5500',
