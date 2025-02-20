@@ -246,7 +246,6 @@ app.use(cors({
 // Other middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('public'));
 
 const db = new sqlite3.Database(DB_PATH, (err) => {
     if (err) {
