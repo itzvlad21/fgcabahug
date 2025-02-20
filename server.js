@@ -69,7 +69,7 @@ const ALLOWED_DOMAINS = [
 
 const passwordResetLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 hour
-    max: 3, // 3 requests per hour
+    max: 15, // 3 requests per hour
     message: { error: 'Too many password reset attempts. Please try again later.' }
 });
 
