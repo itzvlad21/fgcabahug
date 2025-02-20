@@ -79,7 +79,7 @@ if (!BASE_URL) {
     console.warn('WARNING: BASE_URL not set in environment variables. Using default value.');
 }
 
-const defaultBaseUrl = 'http://82.29.161.124:3000/';
+const defaultBaseUrl = 'http://82.29.161.124:3000';
 const baseUrl = BASE_URL || defaultBaseUrl;
 
 // Ensure trailing slash is consistent
