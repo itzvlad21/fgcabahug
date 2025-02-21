@@ -6,7 +6,6 @@
     
 }
 
-
 .lato-thin {
     font-family: "Lato", serif;
     font-weight: 100;
@@ -98,30 +97,6 @@ h1, h2, h3, h4 {
     font-family: 'Lato', serif;
     color: white;
 }
-
-
-/* Header and Navigation */
-.navbar {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: #0F553F; /* Corporate green */
-    padding: 0.5rem 2rem;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 100;
-    height: 60px; /* Fixed height for consistency */
-}
-
-/* Navbar scroll behavior 
-.navbar {
-    transition: transform 0.3s ease;
-}
-
-.navbar.hidden {
-    transform: translateY(-100%);
-} */
 
 /* Floating Action Button */
 .fab-container {
@@ -262,7 +237,7 @@ h1, h2, h3, h4 {
     cursor: pointer;
     z-index: 100;
 }
-
+    
 .hamburger span {
     width: 100%;
     height: 3px;
@@ -844,3 +819,4 @@ section h2::after {
         font-size: 10px;
     }
 }
+
