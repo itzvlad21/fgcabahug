@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     text-decoration: none;
     line-height: 0;
 ">
-    <img src="img/logo/logo.png" alt="FG Logo" class="l_logo">
+    <img src="img/people/logo.png" alt="FG Logo" class="l_logo">
 </a>
             </div>
         `;
