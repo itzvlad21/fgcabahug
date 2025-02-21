@@ -1,16 +1,13 @@
 /* Hero Section */
 #hero {
+    position: relative;
+    min-height: calc(100vh - 80px);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/people/toyota_1.jpg');
+    background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background-image: transparent;
-    background-size: cover, 40rem 4rem, auto;
-    min-height: calc(100vh - 80px);
-    padding: 2rem 0 2rem 4rem; 
-    position: relative;
-    overflow: hidden;
-    background-image: linear-gradient(to bottom right,  #004e1f 0%, #72c293 100%);
-    background-size: cover, 40rem 4rem, auto;
+    padding: 4rem;
 }
 
 .hero-content {
