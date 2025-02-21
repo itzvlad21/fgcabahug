@@ -144,19 +144,19 @@ app.use((req, res, next) => {
     
     // Content Security Policy
     res.setHeader('Content-Security-Policy', [
-    "default-src 'self' http: https:",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http:",
-    "style-src 'self' 'unsafe-inline' http: https:",
-    "font-src 'self' http: https:",
-    "img-src 'self' data: http: https:",
-    "connect-src 'self' http: https:",
-    "frame-src 'self' http: https:"
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://app.cal.com",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
+    "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
+    "img-src 'self' data: https:",
+    "connect-src 'self' https://api.cal.com",
+    "frame-src 'self' https://app.cal.com"
 ].join('; '));
 
     // HSTS - only add if you have HTTPS configured
-    //if (req.secure) {
-        //res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-    //}
+    if (req.secure) {
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+    }
 
     next();
 });
