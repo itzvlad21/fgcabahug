@@ -154,9 +154,9 @@ app.use((req, res, next) => {
 ].join('; '));
 
     // HSTS - only add if you have HTTPS configured
-    if (req.secure) {
-     res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-    }
+    //if (req.secure) {
+     //res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+    //}
 
     next();
 });
