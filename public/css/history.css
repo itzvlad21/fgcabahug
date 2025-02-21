@@ -72,7 +72,7 @@
     font-weight: bold;
     margin-bottom: 1rem;
     color: rgb(255, 255, 255);
-    background: rgba(0, 0, 0, 0);
+    background: rgb(0, 0, 0);
     display: inline-block;
     padding: 0.5rem 1rem;
     border-radius: 8px;
@@ -83,7 +83,7 @@
     font-size: 2rem;
     margin-bottom: 1.5rem;
     color: rgb(255, 255, 255);
-    background: rgba(0, 0, 0, 0);
+    background: rgb(0, 0, 0);
     display: inline-block;
     padding: 0.5rem 1rem;
     border-radius: 8px;
@@ -93,7 +93,7 @@
 .timeline-content p {
     line-height: 1.8;
     font-size: 1.1rem;
-    background: rgba(0, 0, 0, 0);
+    background: rgb(0, 0, 0);
     display: inline-block;
     padding: 0.5rem 1rem;
     border-radius: 8px;
