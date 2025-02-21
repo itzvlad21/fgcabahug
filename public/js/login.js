@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginForm = `
     <div class="form-container">
         <div class="logo">
-            <img src="img/people/banner.png" alt="FG Cabahug Trading">
+            <img src="img/logo/banner.png" alt="FG Cabahug Trading">
         </div>
         <div class="form-group">
             <label for="email">Email or Username</label>
@@ -62,15 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <label for="password">Password</label>
             <input type="password" id="loginPassword" placeholder="Password" required>
         </div>
-        <button type="submit" class="login-btn" onclick="handleLogin(event)">Sign In</button>
-        
-        <div class="divider">or</div>
-        
-        <button type="button" class="google-btn">
-            <img src="img/logo/google.png" alt="Google">
-            Sign in with Google
-        </button>
-        
+        <button type="submit" class="login-btn" onclick="handleLogin(event)">Sign In</button>    
         <div class="links">
             <a href="#" onclick="forgotPassword(event)">Forgot password?</a>
             <a href="#" onclick="toggleForm('register')">Don't have an account?</a>
@@ -86,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerForm = `
         <div class="form-container">
             <div class="logo">
-                <img src="img/people/banner.png" alt="FG Cabahug Trading">
+                <img src="img/logo/banner.png" alt="FG Cabahug Trading">
             </div>
             <div class="form-group">
                 <label for="username">Username</label>
