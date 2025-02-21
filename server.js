@@ -211,7 +211,7 @@ async function verifyToken(token) {
 // Create database folder if it doesn't exist
 // const DB_PATH = path.join(__dirname, 'data', 'database.sqlite');
 
-const DB_PATH = path.join('/var/www/fgcabahug/data', 'database.sqlite');
+const DB_PATH = path.join(__dirname, 'data', 'database.sqlite');
 
 
 // Configure CORS to allow requests from live server
