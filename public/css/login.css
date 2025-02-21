@@ -340,3 +340,48 @@ body {
 .requirement-met::before {
     content: '✓ ';
 }
+
+.back-to-website {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+.back-link {
+    color: white;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: rgba(255, 255, 255, 0.2); /* Translucent white background */
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #004E1F; /* Dark green text on hover */
+}
+
+.back-link i {
+    margin-right: 8px;
+}
+
+.back-link:hover i {
+    transform: translateX(-5px);
+}
+
+@media (max-width: 768px) {
+    .back-to-website {
+        top: 10px;
+        left: 10px;
+    }
+
+    .back-link {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+}
