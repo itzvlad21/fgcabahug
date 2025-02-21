@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginForm = `
     <div class="form-container">
         <div class="logo">
-            <img src="img/logo/banner.png" alt="FG Cabahug Trading">
+            <img src="img/people/banner.png" alt="FG Cabahug Trading">
         </div>
         <div class="form-group">
             <label for="email">Email or Username</label>
