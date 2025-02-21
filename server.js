@@ -82,7 +82,7 @@ if (!BASE_URL) {
     console.warn('WARNING: BASE_URL not set in environment variables. Using default value.');
 }
 
-const defaultBaseUrl = 'http://fgcabahugtrading.com';
+const defaultBaseUrl = 'https://fgcabahugtrading.com';
 const baseUrl = BASE_URL || defaultBaseUrl;
 
 // Ensure trailing slash is consistent
