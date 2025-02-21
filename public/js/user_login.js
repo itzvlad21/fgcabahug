@@ -12,7 +12,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
             <div class="logo">
-                <a href="index.html"><img src="img/people/logo.png" alt="FG Logo" class="l_logo"></a>
+                <a href="index.html" style="
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    line-height: 0;
+">
+    <img src="img/logo/logo.png" alt="FG Logo" class="l_logo">
+</a>
             </div>
         `;
 
