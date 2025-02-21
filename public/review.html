@@ -65,6 +65,43 @@
 
         <section class="review-form-section">
             <div class="review-container">
+
+                <div class="reviews-display">
+                    <h2>Recent Reviews</h2>
+                    <div class="review-filter">
+                        <label for="starFilter">Filter by rating:</label>
+                        <select id="starFilter">
+                            <option value="">All Ratings</option>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="2">2 Stars</option>
+                            <option value="1">1 Star</option>
+                        </select>
+                    </div>
+                    <div class="reviews-grid">
+                        <!-- Example review cards - These would be populated dynamically -->
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <h3>John Doe</h3>
+                                    <div class="review-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <span class="service-tag">Window Tinting</span>
+                            </div>
+                            <p class="review-text">"Excellent service! The team was professional and the results exceeded my expectations."</p>
+                            <span class="review-date">2 days ago</span>
+                        </div>
+                        <!-- More review cards would be added dynamically -->
+                    </div>
+                </div>
+                
                 <div class="review-form-wrapper">
                     <h2>Write a Review</h2>
                     <form id="reviewForm" class="review-form">
@@ -103,42 +140,6 @@
 
                         <button type="submit" class="submit-review-btn">Submit Review</button>
                     </form>
-                </div>
-
-                <div class="reviews-display">
-                    <h2>Recent Reviews</h2>
-                    <div class="review-filter">
-                        <label for="starFilter">Filter by rating:</label>
-                        <select id="starFilter">
-                            <option value="">All Ratings</option>
-                            <option value="5">5 Stars</option>
-                            <option value="4">4 Stars</option>
-                            <option value="3">3 Stars</option>
-                            <option value="2">2 Stars</option>
-                            <option value="1">1 Star</option>
-                        </select>
-                    </div>
-                    <div class="reviews-grid">
-                        <!-- Example review cards - These would be populated dynamically -->
-                        <div class="review-card">
-                            <div class="review-header">
-                                <div class="reviewer-info">
-                                    <h3>John Doe</h3>
-                                    <div class="review-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <span class="service-tag">Window Tinting</span>
-                            </div>
-                            <p class="review-text">"Excellent service! The team was professional and the results exceeded my expectations."</p>
-                            <span class="review-date">2 days ago</span>
-                        </div>
-                        <!-- More review cards would be added dynamically -->
-                    </div>
                 </div>
             </div>
         </section>
