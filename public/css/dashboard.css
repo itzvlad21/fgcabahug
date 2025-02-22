@@ -18,9 +18,106 @@
     font-family: 'Lato', sans-serif;
 }
 
-.dashboard-container {
+/* First, add these updates to your dashboard.css */
+
+/* Fix sidebar height and positioning */
+.dashboard-wrapper {
     display: flex;
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0; /* Ensure full height */
+    width: 280px;
+    background-color: var(--primary-green);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    overflow-y: auto; /* Allow scrolling if content is too long */
+    height: 100vh; /* Full viewport height */
+}
+
+/* Main content adjustments */
+.dashboard-main {
+    flex: 1;
+    margin-left: 280px; /* Match sidebar width */
+    min-height: 100vh;
+    padding: 1rem;
+    background: var(--bg-light);
+    transition: margin-left 0.3s ease;
+    width: 100%;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .dashboard-main {
+        margin-left: 0;
+        padding: 0.5rem;
+    }
+
+    /* Improve table responsiveness */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -0.5rem; /* Negative margin to allow full-width scroll */
+    }
+
+    /* Adjust card layouts */
+    .metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0.5rem;
+    }
+
+    /* Improve form layouts */
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* Add overlay for mobile menu */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+@media (max-width: 768px) {
+    .sidebar-overlay.active {
+        display: block;
+    }
+}
+
+/* Improve content spacing */
+.content-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Fix table layouts */
+.table-responsive {
+    overflow-x: auto;
+    margin: 0 -1rem;
+    padding: 0 1rem;
 }
 
 /* Sidebar Styles */
