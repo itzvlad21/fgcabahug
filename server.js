@@ -237,10 +237,66 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+app.use((req, res, next) => {
+    if (req.path.endsWith('.html')) {
+        // Remove .html from the URL
+        const newPath = req.path.slice(0, -5);
+        res.redirect(301, newPath);
+        return;
+    }
+    next();
+});
+
 // Other middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+    extensions: ['html']
+}));
 app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/appointment', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'appointment.html'));
+});
+
+app.get('/reset-password', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'reset-password.html'));
+});
+
+app.get('/verify-email', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'verify-email.html'));
+});
+
+app.get('/products', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'products.html'));
+});
+
+app.get('/faq', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'faq.html'));
+});
+
+app.get('/ppf', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'ppf.html'));
+});
+
+app.get('/settings', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'settings.html'));
+});
+
+app.get('/review', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'review.html'));
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+});
 
 const db = new sqlite3.Database(DB_PATH, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
     if (err) {
