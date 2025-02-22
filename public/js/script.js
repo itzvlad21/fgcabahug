@@ -383,6 +383,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+//fab nav
 document.addEventListener('DOMContentLoaded', function() {
     // Navbar scroll handling
     let lastScroll = 0;
@@ -419,16 +420,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle FAB menu item clicks
     document.querySelectorAll('.fab-item').forEach(item => {
         item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const target = document.querySelector(item.getAttribute('href'));
+            const href = item.getAttribute('href');
+            const target = document.querySelector(href);
+    
+            // If it's an internal page link with a hash, scroll to section
             if (target) {
+                e.preventDefault();
                 target.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
-                fabMenu.classList.remove('active');
-                fabMain.classList.remove('active');
             }
+    
+            // Close the FAB menu
+            fabMenu.classList.remove('active');
+            fabMain.classList.remove('active');
+    
+            // For external pages or full page links, default behavior will navigate
         });
     });
 });
