@@ -16,7 +16,7 @@
     <script src="js/dashboard/dashboard-faq.js" defer></script>
     <script src="js/dashboard/dashboard-pagination.js" defer></script>
     <script src="/socket.io/socket.io.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" type="image/x-icon" href="img/people/logo.ico">
 </head>
 
@@ -360,6 +360,9 @@
                     <div class="users-section">
                         <div class="section-header">
                             <h2>Users Management</h2>
+                        </div>
+
+                        <div class="users-table-container">
                             <div class="table-actions">
                                 <div class="search-wrapper">
                                     <input type="text" id="userSearch" placeholder="Search users...">
@@ -371,9 +374,6 @@
                                     <option value="admin">Admin</option>
                                 </select>
                             </div>
-                        </div>
-
-                        <div class="users-table-container">
                             <table class="users-table">
                                 <thead>
                                     <tr>
@@ -401,6 +401,9 @@
                     <div class="bookings-section">
                         <div class="section-header">
                             <h2>Bookings Management</h2>
+                        </div>
+
+                        <div class="bookings-table-container">
                             <div class="table-actions">
                                 <div class="search-wrapper">
                                     <input type="text" id="bookingSearch" placeholder="Search bookings...">
@@ -416,9 +419,6 @@
                                     <i class="fas fa-file-export"></i> Export
                                 </button>
                             </div>
-                        </div>
-
-                        <div class="bookings-table-container">
                             <table class="bookings-table">
                                 <thead>
                                     <tr>
@@ -445,6 +445,9 @@
                     <div class="reviews-section">
                         <div class="section-header">
                             <h2>Reviews Management</h2>
+                        </div>
+
+                        <div class="reviews-table-container">
                             <div class="table-actions">
                                 <div class="rating-filter">
                                     <select id="ratingFilter">
@@ -461,9 +464,6 @@
                                     <i class="fas fa-search"></i>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="reviews-table-container">
                             <table class="reviews-table">
                                 <thead>
                                     <tr>
@@ -482,105 +482,105 @@
                         </div>
                     </div>
                     <!-- Inside customizationContent div -->
-<div class="faq-management-section">
-    <div class="section-header">
-        <h2>FAQ Management</h2>
-        <button class="action-btn add-category-btn" onclick="showAddCategoryModal()">
-            <i class="fas fa-plus"></i> Add Category
-        </button>
-    </div>
+                    <div class="faq-management-section">
+                        <div class="section-header">
+                            <h2>FAQ Management</h2>
+                        </div>
+                        <button class="action-btn add-category-btn" onclick="showAddCategoryModal()">
+                            <i class="fas fa-plus"></i> Add Category
+                        </button>
 
-    <div class="faq-categories" id="faqManagementContainer">
-        <!-- Categories will be loaded here -->
-    </div>
-</div>
+                        <div class="faq-categories" id="faqManagementContainer">
+                            <!-- Categories will be loaded here -->
+                        </div>
+                    </div>
 
-<!-- Add Category Modal -->
-<div id="addCategoryModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>Add FAQ Category</h3>
-            <button class="close-btn">&times;</button>
-        </div>
-        <form id="addCategoryForm">
-            <div class="form-group">
-                <label for="categoryName">Category Name:</label>
-                <input type="text" id="categoryName" required>
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="submit-btn">Add Category</button>
-            </div>
-        </form>
-    </div>
-</div>
+                    <!-- Add Category Modal -->
+                    <div id="addCategoryModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Add FAQ Category</h3>
+                                <button class="close-btn">&times;</button>
+                            </div>
+                            <form id="addCategoryForm">
+                                <div class="form-group">
+                                    <label for="categoryName">Category Name:</label>
+                                    <input type="text" id="categoryName" required>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="submit-btn">Add Category</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
-<!-- Add Question Modal -->
-<div id="addQuestionModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>Add FAQ Question</h3>
-            <button class="close-btn">&times;</button>
-        </div>
-        <form id="addQuestionForm">
-            <input type="hidden" id="questionCategoryId">
-            <div class="form-group">
-                <label for="question">Question:</label>
-                <input type="text" id="question" required>
-            </div>
-            <div class="form-group">
-                <label for="answer">Answer:</label>
-                <textarea id="answer" rows="4" required></textarea>
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="submit-btn">Add Question</button>
-            </div>
-        </form>
-    </div>
-</div>
+                    <!-- Add Question Modal -->
+                    <div id="addQuestionModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Add FAQ Question</h3>
+                                <button class="close-btn">&times;</button>
+                            </div>
+                            <form id="addQuestionForm">
+                                <input type="hidden" id="questionCategoryId">
+                                <div class="form-group">
+                                    <label for="question">Question:</label>
+                                    <input type="text" id="question" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="answer">Answer:</label>
+                                    <textarea id="answer" rows="4" required></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="submit-btn">Add Question</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
-<!-- Edit Category Modal -->
-<div id="editCategoryModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>Edit FAQ Category</h3>
-            <button class="close-btn">&times;</button>
-        </div>
-        <form id="editCategoryForm">
-            <input type="hidden" id="editCategoryId">
-            <div class="form-group">
-                <label for="editCategoryName">Category Name:</label>
-                <input type="text" id="editCategoryName" required>
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="submit-btn">Update Category</button>
-            </div>
-        </form>
-    </div>
-</div>
+                    <!-- Edit Category Modal -->
+                    <div id="editCategoryModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Edit FAQ Category</h3>
+                                <button class="close-btn">&times;</button>
+                            </div>
+                            <form id="editCategoryForm">
+                                <input type="hidden" id="editCategoryId">
+                                <div class="form-group">
+                                    <label for="editCategoryName">Category Name:</label>
+                                    <input type="text" id="editCategoryName" required>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="submit-btn">Update Category</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
-<!-- Edit Question Modal -->
-<div id="editQuestionModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>Edit FAQ Question</h3>
-            <button class="close-btn">&times;</button>
-        </div>
-        <form id="editQuestionForm">
-            <input type="hidden" id="editQuestionId">
-            <div class="form-group">
-                <label for="editQuestionText">Question:</label>
-                <input type="text" id="editQuestionText" required>
-            </div>
-            <div class="form-group">
-                <label for="editQuestionAnswer">Answer:</label>
-                <textarea id="editQuestionAnswer" rows="4" required></textarea>
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="submit-btn">Update Question</button>
-            </div>
-        </form>
-    </div>
-</div>
+                    <!-- Edit Question Modal -->
+                    <div id="editQuestionModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Edit FAQ Question</h3>
+                                <button class="close-btn">&times;</button>
+                            </div>
+                            <form id="editQuestionForm">
+                                <input type="hidden" id="editQuestionId">
+                                <div class="form-group">
+                                    <label for="editQuestionText">Question:</label>
+                                    <input type="text" id="editQuestionText" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editQuestionAnswer">Answer:</label>
+                                    <textarea id="editQuestionAnswer" rows="4" required></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="submit-btn">Update Question</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
                 </div>
             </div>
