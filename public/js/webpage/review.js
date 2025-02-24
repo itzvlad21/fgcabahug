@@ -1,107 +1,135 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Star Rating System
-    const stars = document.querySelectorAll('.stars i');
-    const ratingInput = document.getElementById('rating');
-    let currentRating = 0;
+    // Load reviews immediately for all users
+    loadNewReviews();
 
-    stars.forEach(star => {
-        // Hover effect
-        star.addEventListener('mouseover', function() {
-            const rating = this.dataset.rating;
-            highlightStars(rating);
+    // Check authentication and handle form display
+    const reviewForm = document.getElementById('reviewForm');
+    const reviewFormWrapper = document.querySelector('.review-form-wrapper');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    if (!currentUser) {
+        reviewFormWrapper.innerHTML = `
+            <div class="login-prompt">
+                <h2>Write a Review</h2>
+                <p>Please <a href="login.html">login</a> to submit a review</p>
+            </div>
+        `;
+    } else {
+        initializeReviewForm();
+    }
+
+    function initializeReviewForm() {
+        // Auto-populate user data
+        nameInput.value = currentUser.fullName || currentUser.username;
+        emailInput.value = currentUser.email;
+        nameInput.readOnly = true;
+        emailInput.readOnly = true;
+
+        // Star Rating System
+        const stars = document.querySelectorAll('.stars i');
+        const ratingInput = document.getElementById('rating');
+        let currentRating = 0;
+
+        stars.forEach(star => {
+            // Hover effect
+            star.addEventListener('mouseover', function() {
+                const rating = this.dataset.rating;
+                highlightStars(rating);
+            });
+
+            // Click handler
+            star.addEventListener('click', function() {
+                currentRating = this.dataset.rating;
+                ratingInput.value = currentRating;
+                highlightStars(currentRating);
+            });
         });
 
-        // Click handler
-        star.addEventListener('click', function() {
-            currentRating = this.dataset.rating;
-            ratingInput.value = currentRating;
+        document.querySelector('.stars').addEventListener('mouseleave', function() {
             highlightStars(currentRating);
         });
-    });
 
-    // Reset stars when mouse leaves container
-    document.querySelector('.stars').addEventListener('mouseleave', function() {
-        highlightStars(currentRating);
-    });
+        function highlightStars(rating) {
+            stars.forEach(star => {
+                const starRating = star.dataset.rating;
+                if (starRating <= rating) {
+                    star.classList.remove('far');
+                    star.classList.add('fas');
+                } else {
+                    star.classList.remove('fas');
+                    star.classList.add('far');
+                }
+            });
+        }
 
-    function highlightStars(rating) {
-        stars.forEach(star => {
-            const starRating = star.dataset.rating;
-            if (starRating <= rating) {
-                star.classList.remove('far');
-                star.classList.add('fas');
-            } else {
-                star.classList.remove('fas');
-                star.classList.add('far');
+        reviewForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            console.log('Form submitted');
+        
+            if (!validateForm()) {
+                console.log('Form validation failed');
+                return;
+            }
+        
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+        
+            try {
+                const formData = {
+                    rating: ratingInput.value,
+                    name: nameInput.value,
+                    email: emailInput.value,
+                    serviceType: document.getElementById('serviceType').value,
+                    review: document.getElementById('review').value,
+                    date: new Date().toISOString()
+                };
+                
+                const response = await fetch('/api/reviews', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+        
+                const result = await response.json();
+        
+                if (!response.ok) {
+                    throw new Error(result.error || 'Failed to submit review');
+                }
+        
+                showNotification('Review submitted successfully!', 'success');
+                reviewForm.reset();
+                currentRating = 0;
+                highlightStars(0);
+                
+                // Auto-populate user data again after form reset
+                nameInput.value = currentUser.fullName || currentUser.username;
+                emailInput.value = currentUser.email;
+                
+                // Reload reviews
+                loadNewReviews();
+        
+            } catch (error) {
+                console.error('Submission error:', error);
+                showNotification(error.message || 'Failed to submit review. Please try again.', 'error');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Submit Review';
             }
         });
     }
 
-    // Form Submission
-    const reviewForm = document.getElementById('reviewForm');
-    reviewForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        console.log('Form submitted'); // Debug log
-    
-        // Validate form
-        if (!validateForm()) {
-            console.log('Form validation failed'); // Debug log
-            return;
-        }
-    
-        const submitButton = this.querySelector('button[type="submit"]');
-        submitButton.disabled = true;
-        submitButton.textContent = 'Submitting...';
-    
-        try {
-            const formData = {
-                rating: ratingInput.value,
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                serviceType: document.getElementById('serviceType').value,
-                review: document.getElementById('review').value,
-                date: new Date().toISOString()
-            };
-            
-            console.log('Sending data:', formData); // Debug log
-    
-            const response = await fetch('/api/reviews', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            });
-    
-            const result = await response.json();
-            console.log('Server response:', result); // Debug log
-    
-            if (!response.ok) {
-                throw new Error(result.error || 'Failed to submit review');
-            }
-    
-            // Success handling
-            showNotification('Review submitted successfully!', 'success');
-            reviewForm.reset();
-            currentRating = 0;
-            highlightStars(0);
-    
-        } catch (error) {
-            console.error('Submission error:', error); // Detailed error log
-            showNotification(error.message || 'Failed to submit review. Please try again.', 'error');
-        } finally {
-            submitButton.disabled = false;
-            submitButton.textContent = 'Submit Review';
-        }
-    });
-
     function validateForm() {
-        if (!currentRating) {
+        if (!document.getElementById('rating').value) {
             showNotification('Please select a rating', 'error');
             return false;
         }
 
-        const requiredFields = ['name', 'email', 'serviceType', 'review'];
+        const requiredFields = ['serviceType', 'review'];
         for (const field of requiredFields) {
             const element = document.getElementById(field);
             if (!element.value.trim()) {
@@ -109,14 +137,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.focus();
                 return false;
             }
-        }
-
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(document.getElementById('email').value)) {
-            showNotification('Please enter a valid email address', 'error');
-            document.getElementById('email').focus();
-            return false;
         }
 
         return true;
@@ -129,12 +149,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.body.appendChild(notification);
 
-        // Fade in
         setTimeout(() => {
             notification.classList.add('show');
         }, 10);
 
-        // Remove after delay
         setTimeout(() => {
             notification.classList.remove('show');
             setTimeout(() => {
@@ -148,12 +166,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const response = await fetch('/api/reviews');
             const reviews = await response.json();
             
+            // Sort reviews by date (newest first)
+            reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
             const reviewsGrid = document.querySelector('.reviews-grid');
-            reviewsGrid.innerHTML = ''; // Clear existing reviews
+            reviewsGrid.innerHTML = '';
 
             reviews.forEach(review => {
                 const reviewCard = createReviewCard(review);
-                reviewsGrid.insertBefore(reviewCard, reviewsGrid.firstChild);
+                reviewsGrid.appendChild(reviewCard);
             });
         } catch (error) {
             console.error('Error loading reviews:', error);
@@ -163,19 +184,15 @@ document.addEventListener('DOMContentLoaded', function() {
     function generateStarRating(rating) {
         let stars = '';
         for (let i = 1; i <= 5; i++) {
-            if (i <= rating) {
-                stars += '<i class="fas fa-star"></i>'; // Filled star
-            } else {
-                stars += '<i class="far fa-star"></i>'; // Empty star
-            }
+            stars += `<i class="${i <= rating ? 'fas' : 'far'} fa-star"></i>`;
         }
         return stars;
     }
     
-
     function createReviewCard(review) {
         const card = document.createElement('div');
         card.className = 'review-card';
+        card.dataset.date = review.date;
         
         card.innerHTML = `
             <div class="review-header">
@@ -211,8 +228,36 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Initial load of reviews
-    loadNewReviews();
+    // Star filter functionality
+    const starFilter = document.getElementById('starFilter');
+    starFilter.addEventListener('change', function() {
+        const selectedValue = this.value;
+        const reviewCards = Array.from(document.querySelectorAll('.review-card'));
+
+        if (selectedValue === 'recent') {
+            // Sort by date for recent filter
+            reviewCards.sort((a, b) => {
+                const dateA = new Date(a.dataset.date);
+                const dateB = new Date(b.dataset.date);
+                return dateB - dateA;
+            });
+            
+            const reviewsGrid = document.querySelector('.reviews-grid');
+            reviewCards.forEach(card => {
+                reviewsGrid.appendChild(card);
+                card.style.display = 'block';
+            });
+        } else {
+            reviewCards.forEach(card => {
+                if (selectedValue === '') {
+                    card.style.display = 'block';
+                } else {
+                    const starCount = card.querySelectorAll('.review-stars .fas').length;
+                    card.style.display = (starCount === parseInt(selectedValue)) ? 'block' : 'none';
+                }
+            });
+        }
+    });
 
     // Mobile menu handling
     const hamburger = document.querySelector('.hamburger');
