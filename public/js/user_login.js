@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="user-dropdown">
                 <button class="user-dropdown-btn">${currentUser.username} <i class="fas fa-chevron-down"></i></button>
                 <div class="user-dropdown-content">
+                    ${currentUser.role === 'admin' ? 
+                        '<a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>' 
+                        : ''}
                     <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
                     <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
