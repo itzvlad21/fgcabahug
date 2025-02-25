@@ -985,7 +985,7 @@ async function loadShowcaseReviews() {
             const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
             
             const reviewCard = document.createElement('div');
-            reviewCard.className = 'staff-item review-card';
+            reviewCard.className = 'staff-item review-card clickable';
             reviewCard.innerHTML = `
                 <div class="review-header">
                     <span class="review-author">${review.name}</span>
@@ -995,6 +995,11 @@ async function loadShowcaseReviews() {
                 <p class="review-text">"${review.review}"</p>
                 <span class="review-date">${formatReviewDate(review.date)}</span>
             `;
+            
+            // Add click event listener to redirect to reviews.html
+            reviewCard.addEventListener('click', () => {
+                window.location.href = 'review.html';
+            });
             
             reviewsGrid.appendChild(reviewCard);
         });
@@ -1007,6 +1012,7 @@ async function loadShowcaseReviews() {
         console.error('Error loading showcase reviews:', error);
     }
 }
+
 
 // Format date helper
 function formatReviewDate(dateString) {
