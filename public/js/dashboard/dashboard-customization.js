@@ -11,7 +11,19 @@ async function deleteReview(reviewId) {
         });
 
         if (response.ok) {
-            // Reload reviews after successful deletion
+            // After deletion, check if we need to adjust the current page
+            // For example, if we're on the last page and delete the last item
+            const currentPage = window.paginationState.reviews.currentPage;
+            const totalItems = window.paginationState.reviews.totalItems - 1; // One less after deletion
+            const itemsPerPage = window.paginationState.reviews.itemsPerPage;
+            const newTotalPages = Math.ceil(totalItems / itemsPerPage);
+            
+            // If current page is now beyond total pages, go to last page
+            if (currentPage > newTotalPages && newTotalPages > 0) {
+                window.paginationState.reviews.currentPage = newTotalPages;
+            }
+            
+            // Reload reviews
             loadReviews();
             showNotification('Review deleted successfully', 'success');
         } else {
@@ -27,10 +39,44 @@ async function deleteReview(reviewId) {
 async function loadReviews() {
     try {
         const response = await fetch('/api/reviews');
-        const reviews = await response.json();
+        const allReviews = await response.json();
         
         const tbody = document.getElementById('reviewsTableBody');
-        if (!tbody) return;
+        const paginationContainer = document.getElementById('reviewsPagination');
+        if (!tbody || !paginationContainer) return;
+
+        // Get current filter values
+        const ratingFilter = document.getElementById('ratingFilter');
+        const searchInput = document.getElementById('reviewSearch');
+        const selectedRating = ratingFilter ? ratingFilter.value : '';
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        
+        // Apply filters to the complete dataset
+        const filteredReviews = allReviews.filter(review => {
+            const matchesRating = !selectedRating || review.rating === parseInt(selectedRating);
+            const reviewText = `${review.name} ${review.review}`.toLowerCase();
+            const matchesSearch = !searchTerm || reviewText.includes(searchTerm);
+            return matchesRating && matchesSearch;
+        });
+        
+        // Update pagination state
+        window.paginationState.reviews.totalItems = filteredReviews.length;
+        window.paginationState.reviews.totalPages = Math.ceil(
+            filteredReviews.length / window.paginationState.reviews.itemsPerPage
+        );
+        
+        // Ensure current page is valid
+        if (window.paginationState.reviews.currentPage > window.paginationState.reviews.totalPages) {
+            window.paginationState.reviews.currentPage = 1;
+        }
+        
+        // Calculate pagination indices
+        const startIndex = (window.paginationState.reviews.currentPage - 1) * 
+                            window.paginationState.reviews.itemsPerPage;
+        const endIndex = startIndex + window.paginationState.reviews.itemsPerPage;
+        
+        // Get only the reviews for current page
+        const currentPageReviews = filteredReviews.slice(startIndex, endIndex);
 
         function generateStarRating(rating) {
             return Array(5).fill().map((_, i) => 
@@ -42,7 +88,8 @@ async function loadReviews() {
             return `service-type-badge ${type.toLowerCase()}`;
         }
 
-        tbody.innerHTML = reviews.map((review, index) => `
+        // Render current page reviews
+        tbody.innerHTML = currentPageReviews.map((review) => `
             <tr>
                 <td>${review.name}</td>
                 <td>
@@ -75,33 +122,48 @@ async function loadReviews() {
             </tr>
         `).join('');
 
-        // Add filter functionality
-        const ratingFilter = document.getElementById('ratingFilter');
-        const searchInput = document.getElementById('reviewSearch');
+        // Update pagination controls
+        window.updatePagination('reviews', window.paginationState.reviews);
 
-        function filterReviews() {
-            const rating = ratingFilter.value;
-            const searchTerm = searchInput.value.toLowerCase();
-            const rows = tbody.querySelectorAll('tr');
-
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                const stars = row.querySelector('.star-rating').querySelectorAll('.fas').length;
-                const matchesRating = !rating || stars === parseInt(rating);
-                const matchesSearch = text.includes(searchTerm);
-
-                row.style.display = matchesRating && matchesSearch ? '' : 'none';
+        // Attach filter handlers if they don't exist
+        if (ratingFilter && !ratingFilter._hasFilterListener) {
+            ratingFilter.addEventListener('change', function() {
+                // Reset to first page when filtering
+                window.paginationState.reviews.currentPage = 1;
+                loadReviews();
             });
+            ratingFilter._hasFilterListener = true;
         }
 
-        ratingFilter.addEventListener('change', filterReviews);
-        searchInput.addEventListener('input', filterReviews);
+        if (searchInput && !searchInput._hasFilterListener) {
+            searchInput.addEventListener('input', debounce(function() {
+                // Reset to first page when filtering
+                window.paginationState.reviews.currentPage = 1;
+                loadReviews();
+            }, 300));
+            searchInput._hasFilterListener = true;
+        }
 
     } catch (error) {
         console.error('Error loading reviews:', error);
     }
 }
 
+// Make it available globally
+window.loadReviews = loadReviews;
+
+// Utility debounce function
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
 // Utility function for showing notifications (if not already defined)
 function showNotification(message, type) {
     const notification = document.createElement('div');
