@@ -177,3 +177,14 @@
     border-radius: 12px;
     font-size: 0.8rem;
 }
+
+.staff-item.review-card.clickable {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.staff-item.review-card.clickable:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
