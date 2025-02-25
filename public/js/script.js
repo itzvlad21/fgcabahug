@@ -801,16 +801,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Enhanced Image Comparison Slider
 function initImageComparison() {
     const container = document.querySelector('.image-comparison');
-    const slider = document.querySelector('.comparison-slider');
-    const tintedImage = document.querySelector('.comparison-image.tinted');
+    if (!container) return;
     
-    if (!container || !slider || !tintedImage) {
-        console.warn('Image comparison elements not found');
-        return;
-    }
-
+    const slider = container.querySelector('.comparison-slider');
+    const tintedImage = container.querySelector('.comparison-image.tinted');
+    const originalImage = container.querySelector('.comparison-image.original');
+    
     let isSliding = false;
     let startX;
     let sliderLeft;
@@ -829,19 +828,44 @@ function initImageComparison() {
         
         // Update image clip path
         tintedImage.style.clipPath = `polygon(0 0, ${percentage}% 0, ${percentage}% 100%, 0 100%)`;
+        
+        // Update label opacity based on position
+        const labels = container.querySelectorAll('.slider-label');
+        if (labels.length === 2) {
+            const beforeLabel = labels[0];
+            const afterLabel = labels[1];
+            
+            // Adjust opacity based on slider position
+            beforeLabel.style.opacity = percentage > 50 ? 0.3 : 1;
+            afterLabel.style.opacity = percentage < 50 ? 0.3 : 1;
+        }
     }
 
     function startSliding(e) {
+        e.preventDefault();
         isSliding = true;
+        
+        // Get start position
         startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-        sliderLeft = slider.offsetLeft;
+        
+        // Add active state
+        slider.querySelector('.slider-button').classList.add('active');
+        container.classList.add('sliding');
         
         // Prevent text selection while dragging
         document.body.style.userSelect = 'none';
     }
 
     function stopSliding() {
+        if (!isSliding) return;
+        
         isSliding = false;
+        
+        // Remove active state
+        slider.querySelector('.slider-button').classList.remove('active');
+        container.classList.remove('sliding');
+        
+        // Restore text selection
         document.body.style.userSelect = '';
     }
 
@@ -863,28 +887,430 @@ function initImageComparison() {
     document.addEventListener('touchmove', slide, { passive: false });
     document.addEventListener('touchend', stopSliding);
 
-    // Double click to reset
-    container.addEventListener('dblclick', () => {
-        slider.style.left = '50%';
-        tintedImage.style.clipPath = 'polygon(0 0, 50% 0, 50% 100%, 0 100%)';
-    });
-
+    // Initialize at center position
+    updateSliderPosition(container.getBoundingClientRect().left + container.offsetWidth / 2);
+    
     // Window resize handling
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
             // Reset to middle on resize
-            slider.style.left = '50%';
-            tintedImage.style.clipPath = 'polygon(0 0, 50% 0, 50% 100%, 0 100%)';
+            updateSliderPosition(container.getBoundingClientRect().left + container.offsetWidth / 2);
         }, 250);
+    });
+
+    // Double click to reset to center
+    container.addEventListener('dblclick', () => {
+        updateSliderPosition(container.getBoundingClientRect().left + container.offsetWidth / 2);
     });
 }
 
+// Enhanced PPF Carousel
+function initPPFCarousel() {
+    const container = document.querySelector('.ppf-carousel');
+    if (!container) return;
+    
+    const track = container.querySelector('.carousel-track');
+    const slides = container.querySelectorAll('.carousel-slide');
+    const prevBtn = container.querySelector('.carousel-btn.prev');
+    const nextBtn = container.querySelector('.carousel-btn.next');
+    const indicators = container.querySelectorAll('.indicator');
+    
+    let currentIndex = 0;
+    let slideWidth = slides[0].offsetWidth;
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID = 0;
+    
+    // Set initial slide position
+    updateCarousel();
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        slideWidth = slides[0].offsetWidth;
+        updateCarousel();
+    });
+    
+    // Navigation Buttons
+    nextBtn.addEventListener('click', () => {
+        if (currentIndex >= slides.length - 1) return;
+        currentIndex++;
+        updateCarousel();
+    });
+    
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex <= 0) return;
+        currentIndex--;
+        updateCarousel();
+    });
+    
+    // Indicator Buttons
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            currentIndex = index;
+            updateCarousel();
+        });
+    });
+    
+    // Touch controls
+    slides.forEach((slide, index) => {
+        // Touch events
+        slide.addEventListener('touchstart', touchStart(index));
+        slide.addEventListener('touchmove', touchMove);
+        slide.addEventListener('touchend', touchEnd);
+        
+        // Mouse events
+        slide.addEventListener('mousedown', touchStart(index));
+        slide.addEventListener('mousemove', touchMove);
+        slide.addEventListener('mouseup', touchEnd);
+        slide.addEventListener('mouseleave', touchEnd);
+    });
+    
+    function touchStart(index) {
+        return function(event) {
+            startPos = getPositionX(event);
+            isDragging = true;
+            animationID = requestAnimationFrame(animation);
+        }
+    }
+    
+    function touchMove(event) {
+        if (isDragging) {
+            const currentPosition = getPositionX(event);
+            currentTranslate = prevTranslate + currentPosition - startPos;
+        }
+    }
+    
+    function touchEnd() {
+        isDragging = false;
+        cancelAnimationFrame(animationID);
+        
+        const movedBy = currentTranslate - prevTranslate;
+        
+        // If moved significantly, change slide
+        if (movedBy < -100 && currentIndex < slides.length - 1) {
+            currentIndex++;
+        } else if (movedBy > 100 && currentIndex > 0) {
+            currentIndex--;
+        }
+        
+        updateCarousel();
+    }
+    
+    function getPositionX(event) {
+        return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+    }
+    
+    function animation() {
+        if (isDragging) {
+            setSliderPosition();
+            requestAnimationFrame(animation);
+        }
+    }
+    
+    function setSliderPosition() {
+        track.style.transform = `translateX(${currentTranslate}px)`;
+    }
+    
+    function updateCarousel() {
+        track.style.transition = 'transform 0.5s ease-in-out';
+        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentIndex);
+        });
+        
+        // Update button states
+        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+        prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+        
+        nextBtn.style.opacity = currentIndex === slides.length - 1 ? '0.5' : '1';
+        nextBtn.style.pointerEvents = currentIndex === slides.length - 1 ? 'none' : 'auto';
+        
+        // Store the position after transition
+        prevTranslate = -currentIndex * slideWidth;
+        currentTranslate = prevTranslate;
+    }
+    
+    // Auto-advance carousel
+    let autoAdvanceTimer;
+    
+    function startAutoAdvance() {
+        stopAutoAdvance(); // Clear any existing timer
+        autoAdvanceTimer = setInterval(() => {
+            if (currentIndex < slides.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateCarousel();
+        }, 5000);
+    }
+    
+    function stopAutoAdvance() {
+        if (autoAdvanceTimer) {
+            clearInterval(autoAdvanceTimer);
+        }
+    }
+    
+    // Start/stop auto-advance on hover
+    container.addEventListener('mouseenter', stopAutoAdvance);
+    container.addEventListener('mouseleave', startAutoAdvance);
+    
+    // Start auto-advance
+    startAutoAdvance();
+}
+
+// Initialize service card animations
+function initServiceCards() {
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    if (serviceCards.length === 0) return;
+    
+    // Intersection Observer for scroll animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+    
+    // Observe all service cards
+    serviceCards.forEach(card => {
+        observer.observe(card);
+        
+        // Add hover animation for features
+        const features = card.querySelectorAll('.service-features li');
+        features.forEach((feature, index) => {
+            feature.style.transitionDelay = `${index * 0.1}s`;
+        });
+    });
+}
+
+// Initialize benefit cards animations
+function initBenefitCards() {
+    const benefitCards = document.querySelectorAll('.benefit-card');
+    
+    if (benefitCards.length === 0) return;
+    
+    // Intersection Observer for scroll animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Staggered animation
+                setTimeout(() => {
+                    entry.target.classList.add('animated');
+                }, index * 150);
+                
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+    
+    // Observe all benefit cards
+    benefitCards.forEach(card => {
+        observer.observe(card);
+    });
+}
+
+// Initialize CTA section animation
+function initCTASection() {
+    const ctaSection = document.querySelector('.showcase-cta');
+    
+    if (!ctaSection) return;
+    
+    // Intersection Observer for scroll animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.3
+    });
+    
+    // Observe CTA section
+    observer.observe(ctaSection);
+}
+
+// Add hover effect to buttons
+function initButtonEffects() {
+    const buttons = document.querySelectorAll('.learn-more-btn, .cta-button');
+    
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', (e) => {
+            const x = e.pageX - button.offsetLeft;
+            const y = e.pageY - button.offsetTop;
+            
+            button.style.setProperty('--x', `${x}px`);
+            button.style.setProperty('--y', `${y}px`);
+        });
+    });
+}
+
+// Initialize all car-showcase components
+document.addEventListener('DOMContentLoaded', function() {
+    // Add animation class to section
+    const showcaseSection = document.getElementById('car-showcase');
+    if (showcaseSection) {
+        setTimeout(() => {
+            showcaseSection.classList.add('loaded');
+        }, 300);
+    }
+    
+    // Initialize all components
+    initImageComparison();
+    initPPFCarousel();
+    initServiceCards();
+    initBenefitCards();
+    initCTASection();
+    initButtonEffects();
+    
+    // Lazy load images for better performance
+    const images = document.querySelectorAll('#car-showcase img');
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const src = img.getAttribute('data-src');
+                    if (src) {
+                        img.src = src;
+                        img.removeAttribute('data-src');
+                    }
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+        
+        images.forEach(img => {
+            if (img.getAttribute('data-src')) {
+                imageObserver.observe(img);
+            }
+        });
+    } else {
+        // Fallback for browsers that don't support IntersectionObserver
+        images.forEach(img => {
+            const src = img.getAttribute('data-src');
+            if (src) {
+                img.src = src;
+                img.removeAttribute('data-src');
+            }
+        });
+    }
+});
+
+// Video Modal Functionality
+function initVideoModal() {
+    // Get modal elements
+    const videoModal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
+    const closeBtn = document.querySelector('.close-video-modal');
+    const videoContainers = document.querySelectorAll('.service-video-container');
+    
+    if (!videoModal || !modalVideo || !closeBtn || !videoContainers.length) return;
+    
+    // Function to open modal with video
+    function openVideoModal(videoSrc) {
+        // Set video source
+        modalVideo.querySelector('source').src = videoSrc;
+        modalVideo.load(); // Need to reload after changing source
+        
+        // Show modal with animation
+        videoModal.style.display = 'flex';
+        document.body.classList.add('modal-open');
+        
+        // Trigger reflow for animation
+        void videoModal.offsetWidth;
+        
+        // Start animation
+        videoModal.classList.add('show');
+        
+        // Play video after modal animation completes
+        setTimeout(() => {
+            try {
+                modalVideo.play();
+            } catch (e) {
+                console.warn('Auto-play failed. User interaction may be required.', e);
+            }
+        }, 400);
+    }
+    
+    // Function to close modal
+    function closeVideoModal() {
+        // Pause video
+        modalVideo.pause();
+        
+        // Hide modal with animation
+        videoModal.classList.remove('show');
+        
+        // Remove modal after animation completes
+        setTimeout(() => {
+            videoModal.style.display = 'none';
+            document.body.classList.remove('modal-open');
+            
+            // Clear video source to stop downloading
+            modalVideo.querySelector('source').src = '';
+            modalVideo.load();
+        }, 300);
+    }
+    
+    // Add click event to video containers
+    videoContainers.forEach(container => {
+        container.addEventListener('click', function() {
+            const videoData = this.querySelector('.video-data');
+            if (videoData) {
+                const videoSrc = videoData.getAttribute('data-video-src');
+                if (videoSrc) {
+                    openVideoModal(videoSrc);
+                }
+            }
+        });
+    });
+    
+    // Close button click
+    closeBtn.addEventListener('click', closeVideoModal);
+    
+    // Background click to close
+    videoModal.addEventListener('click', function(e) {
+        if (e.target === videoModal) {
+            closeVideoModal();
+        }
+    });
+    
+    // ESC key to close
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && videoModal.classList.contains('show')) {
+            closeVideoModal();
+        }
+    });
+    
+    // Handle video end
+    modalVideo.addEventListener('ended', function() {
+        // Optional: close modal when video ends
+        // closeVideoModal();
+        
+        // Or just show a replay button
+        this.controls = true;
+    });
+}
+
+
 // Add to your existing DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', function() {
-    // ... existing code ...
-    
+    initVideoModal();
     initImageComparison();
 });
 
