@@ -1711,8 +1711,15 @@
 }
 
 .pagination-btn:hover:not(:disabled) {
-    background: #f3f4f6;
-    border-color: #d1d5db;
+    background-color: #0F553F;
+    color: #ffffff;
+    border-color: #0F553F;
+}
+
+.pagination-btn.active:hover {
+    background-color: #0F553F;
+    color: #ffffff;
+    border-color: #0F553F;
 }
 
 .pagination-btn.active {
