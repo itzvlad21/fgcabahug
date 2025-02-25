@@ -23,6 +23,19 @@ window.paginationState = {
         totalPages: 1,
         itemsPerPage: 5,
         totalItems: 0
+    },
+    // Add these new entries
+    reviews: {
+        currentPage: 1,
+        totalPages: 1,
+        itemsPerPage: 5,
+        totalItems: 0
+    },
+    faqs: {
+        currentPage: 1,
+        totalPages: 1,
+        itemsPerPage: 1, // 1 category per page
+        totalItems: 0
     }
 };
 
@@ -89,6 +102,13 @@ window.changePage = function(type, page) {
             break;
         case 'bookings':
             window.loadBookings();
+            break;
+        // Add these new cases
+        case 'reviews':
+            window.loadReviews();
+            break;
+        case 'faqs':
+            window.loadFAQManagement();
             break;
     }
 };
