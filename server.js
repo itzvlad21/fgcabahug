@@ -21,7 +21,7 @@ const chatHistory = new Map();
 
 const bcrypt = require('bcrypt');
 
-const CAL_API_KEY = 'cal_live_80a4664b1ede141f895c18c8890c4b6c';
+const CAL_API_KEY = 'cal_live_33db22bfd630917db3f762311f059bef';
 
 const crypto = require('crypto');
 
