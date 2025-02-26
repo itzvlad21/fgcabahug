@@ -902,7 +902,7 @@ app.post('/api/send-email', async (req, res) => {
         // Email content lydiaskitchenresto@gmail.com
         const mailOptions = {
             from: process.env.EMAIL_USER,
-            to: 'tebithegamer@gmail.com', // Replace with your email
+            to: 'fgcabahugtrading.business@gmail.com', // Replace with your email
             subject: 'New Contact Form Submission',
             text: `
                 Name: ${name}
@@ -1228,7 +1228,7 @@ app.post('/api/contact', async (req, res) => {
         // Then send email
         const mailOptions = {
             from: process.env.EMAIL_USER,
-            to: 'tebithegamer@gmail.com', // Your email address
+            to: 'fgcabahugtrading.business@gmail.com', // Your email address
             subject: 'New Contact Form Submission',
             text: `
                 Name: ${name}
