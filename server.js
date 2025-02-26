@@ -903,7 +903,7 @@ app.post('/api/send-email', async (req, res) => {
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: 'fgcabahugtrading.business@gmail.com', // Replace with your email
-            subject: 'New Contact Form Submission',
+            subject: 'New Inquiry From Customer',
             text: `
                 Name: ${name}
                 Email: ${email}
