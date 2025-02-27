@@ -36,47 +36,44 @@ async function deleteReview(reviewId) {
     }
 }
 
+function filterReviews() {
+    const rating = document.getElementById('ratingFilter').value;
+    const category = document.getElementById('categoryFilter').value;
+    const searchTerm = document.getElementById('reviewSearch').value.toLowerCase();
+    const rows = document.getElementById('reviewsTableBody').querySelectorAll('tr');
+
+    rows.forEach(row => {
+        const stars = row.querySelector('.star-rating').querySelectorAll('.fas').length;
+        const serviceType = row.querySelector('.service-type-badge').textContent.trim().toLowerCase();
+        const text = row.textContent.toLowerCase();
+        
+        const matchesRating = !rating || stars === parseInt(rating);
+        const matchesCategory = !category || serviceType.includes(category);
+        const matchesSearch = text.includes(searchTerm);
+
+        row.style.display = matchesRating && matchesCategory && matchesSearch ? '' : 'none';
+    });
+}
+
+// Initialize event listeners for all filters
+function initializeReviewFilters() {
+    const ratingFilter = document.getElementById('ratingFilter');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const searchInput = document.getElementById('reviewSearch');
+
+    if (ratingFilter) ratingFilter.addEventListener('change', filterReviews);
+    if (categoryFilter) categoryFilter.addEventListener('change', filterReviews);
+    if (searchInput) searchInput.addEventListener('input', filterReviews);
+}
+
+// Modify the existing loadReviews function to call initializeReviewFilters
 async function loadReviews() {
     try {
         const response = await fetch('/api/reviews');
-        const allReviews = await response.json();
+        const reviews = await response.json();
         
         const tbody = document.getElementById('reviewsTableBody');
-        const paginationContainer = document.getElementById('reviewsPagination');
-        if (!tbody || !paginationContainer) return;
-
-        // Get current filter values
-        const ratingFilter = document.getElementById('ratingFilter');
-        const searchInput = document.getElementById('reviewSearch');
-        const selectedRating = ratingFilter ? ratingFilter.value : '';
-        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
-        
-        // Apply filters to the complete dataset
-        const filteredReviews = allReviews.filter(review => {
-            const matchesRating = !selectedRating || review.rating === parseInt(selectedRating);
-            const reviewText = `${review.name} ${review.review}`.toLowerCase();
-            const matchesSearch = !searchTerm || reviewText.includes(searchTerm);
-            return matchesRating && matchesSearch;
-        });
-        
-        // Update pagination state
-        window.paginationState.reviews.totalItems = filteredReviews.length;
-        window.paginationState.reviews.totalPages = Math.ceil(
-            filteredReviews.length / window.paginationState.reviews.itemsPerPage
-        );
-        
-        // Ensure current page is valid
-        if (window.paginationState.reviews.currentPage > window.paginationState.reviews.totalPages) {
-            window.paginationState.reviews.currentPage = 1;
-        }
-        
-        // Calculate pagination indices
-        const startIndex = (window.paginationState.reviews.currentPage - 1) * 
-                            window.paginationState.reviews.itemsPerPage;
-        const endIndex = startIndex + window.paginationState.reviews.itemsPerPage;
-        
-        // Get only the reviews for current page
-        const currentPageReviews = filteredReviews.slice(startIndex, endIndex);
+        if (!tbody) return;
 
         function generateStarRating(rating) {
             return Array(5).fill().map((_, i) => 
@@ -88,8 +85,7 @@ async function loadReviews() {
             return `service-type-badge ${type.toLowerCase()}`;
         }
 
-        // Render current page reviews
-        tbody.innerHTML = currentPageReviews.map((review) => `
+        tbody.innerHTML = reviews.map((review, index) => `
             <tr>
                 <td>${review.name}</td>
                 <td>
@@ -122,27 +118,8 @@ async function loadReviews() {
             </tr>
         `).join('');
 
-        // Update pagination controls
-        window.updatePagination('reviews', window.paginationState.reviews);
-
-        // Attach filter handlers if they don't exist
-        if (ratingFilter && !ratingFilter._hasFilterListener) {
-            ratingFilter.addEventListener('change', function() {
-                // Reset to first page when filtering
-                window.paginationState.reviews.currentPage = 1;
-                loadReviews();
-            });
-            ratingFilter._hasFilterListener = true;
-        }
-
-        if (searchInput && !searchInput._hasFilterListener) {
-            searchInput.addEventListener('input', debounce(function() {
-                // Reset to first page when filtering
-                window.paginationState.reviews.currentPage = 1;
-                loadReviews();
-            }, 300));
-            searchInput._hasFilterListener = true;
-        }
+        // Initialize all filters after loading reviews
+        initializeReviewFilters();
 
     } catch (error) {
         console.error('Error loading reviews:', error);
