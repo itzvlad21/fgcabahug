@@ -28,18 +28,6 @@ html, body {
     background-attachment: fixed;
 }
 
-/* Remove bullet points from dropdown menu */
-.dropdown-menu {
-    list-style: none;
-    margin: 0;
-    padding: 0.5rem;
-}
-
-.dropdown-menu li {
-    list-style-type: none;
-    margin: 0;
-}
-
 main {
     flex: 1;
     margin-top: 60px;
@@ -450,8 +438,13 @@ main {
 }
 
 @media (max-width: 768px) {
+    .container {
+        padding: 0 0.75rem; /* Reduced side padding from 2rem to 0.75rem */
+        width: 100%;
+    }
+    
     .review-form-section {
-        padding: 2rem 1rem;
+        padding: 2rem 0.5rem; /* Reduced horizontal padding */
     }
 
     .reviews-header {
