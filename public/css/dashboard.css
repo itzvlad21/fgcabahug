@@ -1953,3 +1953,217 @@
     transform: translateY(-1px);
     box-shadow: 0 4px 6px rgba(15, 85, 63, 0.2);
 }
+
+/* Add to existing dashboard.css file */
+.category-filter {
+    margin-right: 1rem;
+}
+
+.category-filter select {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: white;
+    min-width: 150px;
+}
+
+.service-type-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.service-type-badge.tinting {
+    background-color: #e6f7ff;
+    color: #1890ff;
+}
+
+.service-type-badge.ppf {
+    background-color: #f6ffed;
+    color: #52c41a;
+}
+
+.service-type-badge.both {
+    background-color: #fff7e6;
+    color: #fa8c16;
+}
+
+/* Toast notifications */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background: white;
+    min-width: 250px;
+    max-width: 350px;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toast-success {
+    border-left: 4px solid #10B981;
+}
+
+.toast-error {
+    border-left: 4px solid #EF4444;
+}
+
+.toast-info {
+    border-left: 4px solid #3B82F6;
+}
+
+.toast i {
+    font-size: 18px;
+}
+
+.toast-success i {
+    color: #10B981;
+}
+
+.toast-error i {
+    color: #EF4444;
+}
+
+.toast-info i {
+    color: #3B82F6;
+}
+
+/* FAQ Filter Container */
+.faq-filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.faq-filter {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 100%;
+    height: 40px;
+    background-color: white;
+}
+
+.search-wrapper {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-input-container {
+    position: relative;
+    width: 100%;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.5rem 0.5rem 0.5rem 35px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    height: 40px;
+    background-color: white;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #0F553F;
+    box-shadow: 0 0 0 2px rgba(15, 85, 63, 0.1);
+}
+
+.no-results-message {
+    text-align: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Improved responsive styles */
+@media (max-width: 768px) {
+    .faq-filter-container {
+        flex-direction: column;
+        padding: 0.75rem;
+    }
+    
+    .filter-group,
+    .search-wrapper {
+        width: 100%;
+    }
+    
+    .faq-filter,
+    .search-input {
+        font-size: 16px; /* Prevents iOS zoom on focus */
+        height: 44px; /* Larger touch target */
+    }
+    
+    .search-icon {
+        left: 12px;
+    }
+    
+    .toast-container {
+        left: 20px;
+        right: 20px;
+    }
+    
+    .toast {
+        width: calc(100% - 40px);
+        max-width: none;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .faq-filter-container {
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+    
+    .search-input {
+        padding-left: 32px;
+    }
+}
