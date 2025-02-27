@@ -169,9 +169,15 @@ document.addEventListener('DOMContentLoaded', function() {
             // Sort reviews by date (newest first)
             reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
             
+            // Count reviews by rating
+            const counts = countReviewsByRating(reviews);
+            
+            // Update filter options with counts
+            updateFilterOptions(counts);
+            
             const reviewsGrid = document.querySelector('.reviews-grid');
             reviewsGrid.innerHTML = '';
-
+    
             reviews.forEach(review => {
                 const reviewCard = createReviewCard(review);
                 reviewsGrid.appendChild(reviewCard);
@@ -179,6 +185,40 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             console.error('Error loading reviews:', error);
         }
+    }
+    
+    function countReviewsByRating(reviews) {
+        const counts = {
+            total: reviews.length,
+            "5": 0,
+            "4": 0,
+            "3": 0,
+            "2": 0,
+            "1": 0
+        };
+        
+        reviews.forEach(review => {
+            const rating = review.rating.toString();
+            if (counts.hasOwnProperty(rating)) {
+                counts[rating]++;
+            }
+        });
+        
+        return counts;
+    }
+    
+    function updateFilterOptions(counts) {
+        const starFilter = document.getElementById('starFilter');
+        if (!starFilter) return;
+        
+        // Update option text with counts
+        const options = starFilter.options;
+        options[0].text = `All Ratings (${counts.total})`;
+        options[1].text = `5 Stars (${counts["5"]})`;
+        options[2].text = `4 Stars (${counts["4"]})`;
+        options[3].text = `3 Stars (${counts["3"]})`;
+        options[4].text = `2 Stars (${counts["2"]})`;
+        options[5].text = `1 Star (${counts["1"]})`;
     }
 
     function generateStarRating(rating) {
