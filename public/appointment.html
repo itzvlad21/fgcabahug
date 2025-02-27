@@ -12,99 +12,6 @@
     <script src="js/script.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .appointment-container {
-            min-height: calc(100vh - 60px);
-            padding: 4rem 2rem;
-            background-image: linear-gradient(to bottom right, #004e1f 0%, #72c293 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .appointment-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 3rem;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .appointment-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .appointment-header h1 {
-            color: var(--primary-green);
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .agreement-section {
-            margin-bottom: 2rem;
-        }
-
-        .agreement-section h2 {
-            color: var(--primary-green);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .agreement-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .agreement-list li {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(15, 85, 63, 0.05);
-            margin-bottom: 0.5rem;
-            border-radius: 8px;
-            color: #333;
-        }
-
-        .agreement-list li i {
-            color: var(--primary-green);
-        }
-
-        .book-now-btn {
-            background: var(--primary-green);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .book-now-btn:hover {
-            background: #0a4432;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .appointment-container {
-                padding: 2rem 1rem;
-            }
-
-            .appointment-card {
-                padding: 2rem;
-            }
-
-            .appointment-header h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -149,38 +56,119 @@
         </nav>
     </header>
 
-    <main>
-        <div class="appointment-container">
-            <div class="appointment-card">
-                <div class="appointment-header">
-                    <h1>Thank you for choosing F.G Cabahug Trading!</h1>
-                </div>
-                
-                <div class="agreement-section">
-                    <h2>By booking an appointment, you agree to:</h2>
-                    <ul class="agreement-list">
-                        <li>
-                            <i class="fas fa-clock"></i>
-                            Arrive 15 minutes before your scheduled appointment
-                        </li>
-                        <li>
-                            <i class="fas fa-calendar-check"></i>
-                            Provide 24-hour notice for cancellations
-                        </li>
-                        <li>
-                            <i class="fas fa-car"></i>
-                            Ensure your vehicle is clean and ready for service
-                        </li>
-                    </ul>
-                </div>
+    <main>    
+        <section class="appointment-section">
+            <div class="container">
+                <div class="appointment-grid">
+                    <div class="booking-card">
+                        <div class="booking-header">
+                            <h2>Reserve Your Spot</h2>
+                            <button class="book-now-btn" data-cal-link="fg-cabahug-trading/30min" data-cal-namespace="30min">
+                                <span>Book Your Appointment</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="booking-process">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Select Date & Time</h4>
+                                    <p>Pick from our available schedule</p>
+                                </div>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Choose Service</h4>
+                                    <p>Select window tinting, PPF, or both</p>
+                                </div>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Confirm Details</h4>
+                                    <p>Review and finalize your booking</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="agreement-section">
+                            <h3>Appointment Guidelines</h3>
+                            <ul class="agreement-list">
+                                <li>
+                                    <i class="fas fa-clock"></i>
+                                    <span>Please arrive 15 minutes before your scheduled time</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-calendar-check"></i>
+                                    <span>Provide 24-hour notice for any cancellations</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-car"></i>
+                                    <span>Ensure your vehicle is clean and ready for service</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
-                <button class="book-now-btn" data-cal-link="fg-cabahug-trading/30min">
-                    Book Now
-                </button>
+                    <div class="appointment-info">
+                        <div class="section-header">
+                            <h2>Thank You For Choosing FG Cabahug Trading</h2>
+                            <p>Experience premium automotive care from the experts at F.G Cabahug Trading.</p>
+                        </div>
+                        
+                        <div class="service-cards">
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-window-maximize"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h3>Window Tinting</h3>
+                                    <p>Premium quality films with UV protection and heat reduction</p>
+                                </div>
+                            </div>
+                            
+                            <div class="service-card">
+                                <div class="service-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="service-content">
+                                    <h3>Paint Protection Film</h3>
+                                    <p>Shield your vehicle from scratches, chips, and environmental damage</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="why-book">
+                            <h3>Why Book With Us?</h3>
+                            <ul class="benefits-list">
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Expert technicians with years of experience</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Premium materials and superior workmanship</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Satisfaction guaranteed on all services</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Convenient scheduling and timely service</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+    
     </main>
-
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-section">
