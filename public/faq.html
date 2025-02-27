@@ -57,30 +57,45 @@
         </nav>
     </header>
 
-    <main>
-        <section class="faq-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/Images/IMG_1802.png');">
+     <main>
+        <section class="faq-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/people/cabahugfamily.jpg');">
+            <div class="faq-hero-overlay"></div>
             <div class="faq-hero-content">
                 <h1>Frequently Asked Questions</h1>
                 <p>Find answers to common questions about our services and products</p>
+                
+                <div class="faq-search">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="faqSearch" placeholder="Search for questions...">
+                    </div>
+                </div>
             </div>
         </section>
-
-        <div class="faq-search">
-            <div class="search-container">
-                <input type="text" id="faqSearch" placeholder="Search for questions...">
-            </div>
-        </div>
 
         <section class="faq-section">
             <div class="faq-container" id="faqContainer">
                 <!-- Dynamic FAQ content will be loaded here -->
+                <div class="faq-loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading FAQs...</p>
+                </div>
             </div>
         
             <div class="contact-cta">
-                <h3>Didn't Find Your Answer?</h3>
-                <p>Contact our team for personalized assistance with any questions you may have.</p>
-                <a href="index.html#contact" class="contact-btn">Contact Us</a> <br> <br>
-                <a href="appointment.html" class="contact-btn">Book Now</a>
+                <div class="cta-card">
+                    <div class="cta-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="cta-content">
+                        <h3>Didn't Find Your Answer?</h3>
+                        <p>Contact our team for personalized assistance with any questions you may have.</p>
+                        <div class="cta-buttons">
+                            <a href="index.html#contact" class="contact-btn primary">Contact Us</a>
+                            <a href="appointment.html" class="contact-btn secondary">Book Appointment</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
