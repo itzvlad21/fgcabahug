@@ -189,6 +189,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const reviewCard = createReviewCard(review);
                 reviewsGrid.appendChild(reviewCard);
             });
+            
+            // Update average rating display
+            updateAverageRating(reviews);
         } catch (error) {
             console.error('Error loading reviews:', error);
         }
@@ -341,3 +344,33 @@ document.addEventListener('DOMContentLoaded', function() {
         starFilter.addEventListener('change', filterReviewsByStar);
     }
 });
+
+// Function to calculate and display average rating
+function updateAverageRating(reviews) {
+    // Calculate average rating
+    let totalRating = 0;
+    const validReviews = reviews.filter(review => review.rating > 0);
+    
+    if (validReviews.length === 0) {
+        // No reviews with ratings
+        document.getElementById('averageRatingNumber').textContent = "0.0";
+        document.getElementById('averageRatingStars').style.width = "0%";
+        document.getElementById('reviewCount').textContent = "0";
+        return;
+    }
+    
+    validReviews.forEach(review => {
+        totalRating += review.rating;
+    });
+    
+    const averageRating = totalRating / validReviews.length;
+    const formattedRating = averageRating.toFixed(1);
+    
+    // Update the display
+    document.getElementById('averageRatingNumber').textContent = formattedRating;
+    document.getElementById('reviewCount').textContent = validReviews.length;
+    
+    // Update the stars width based on percentage
+    const starsPercentage = (averageRating / 5) * 100;
+    document.getElementById('averageRatingStars').style.width = `${starsPercentage}%`;
+}
