@@ -12,8 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!currentUser) {
         reviewFormWrapper.innerHTML = `
             <div class="login-prompt">
-                <h2>Write a Review</h2>
-                <p>Please <a href="login.html">login</a> to submit a review</p>
+                <div class="user-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <p>Please log in to share your experience with us.<br>
+                Your feedback helps us improve our services<br>
+                for everyone.</p>
+                <a href="login.html" class="login-button">
+                    <i class="fas fa-sign-in-alt"></i> Login to Continue
+                </a>
             </div>
         `;
     } else {
