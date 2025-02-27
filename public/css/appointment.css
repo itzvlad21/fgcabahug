@@ -18,18 +18,6 @@
     padding: 0 2rem;
 }
 
-/* Remove bullet points from dropdown menu */
-.dropdown-menu {
-    list-style: none;
-    margin: 0;
-    padding: 0.5rem;
-}
-
-.dropdown-menu li {
-    list-style-type: none;
-    margin: 0;
-}
-
 /* Hero Section */
 .appointment-hero {
     position: relative;
@@ -440,6 +428,11 @@
 }
 
 @media (max-width: 768px) {
+    .container {
+        padding: 0 0.75rem; /* Reduced side padding from 2rem to 0.75rem */
+        width: 100%;
+    }
+    
     .appointment-hero {
         padding: 4rem 1.5rem;
     }
