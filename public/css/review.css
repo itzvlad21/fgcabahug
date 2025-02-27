@@ -28,6 +28,18 @@ html, body {
     background-attachment: fixed;
 }
 
+/* Remove bullet points from dropdown menu */
+.dropdown-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.dropdown-menu li {
+    list-style-type: none;
+    margin: 0;
+}
+
 main {
     flex: 1;
     margin-top: 60px;
