@@ -1,68 +1,140 @@
-/* Staff and Pics */
+/* Modern Staff and Achievements Showcase */
 #staff-showcase {
-    padding: 4rem 0 2rem 0; /* Reduced bottom padding */
-    background-image: linear-gradient(to bottom right,  #004e1f 0%, #72c293 100%);
-    background-size: cover, 40rem 4rem, auto;
+    padding: 6rem 2rem 4rem;
+    background: linear-gradient(135deg, #004e1f 0%, #72c293 100%);
+    position: relative;
     overflow: hidden;
 }
 
+/* Decorative background elements */
+#staff-showcase::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('img/people/pattern-overlay.png');
+    opacity: 0.05;
+    z-index: 1;
+}
+
+#staff-showcase::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    z-index: 1;
+}
+
+/* Enhanced heading style */
 #staff-showcase h2 {
-    color: #ffffff; /* Change to white */
+    color: #ffffff;
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 3.5rem;
+    position: relative;
+    z-index: 5;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Update staff item styling for better contrast */
-.staff-item {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+#staff-showcase h2::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 3px;
+    background: #ffffff;
+    left: 50%;
+    bottom: -15px;
+    transform: translateX(-50%);
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Container layout */
 .staff-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem; /* Reduced gap */
-    margin-bottom: 0; /* Remove bottom margin */
+    gap: 3rem;
+    position: relative;
+    z-index: 5;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .staff-row-container {
     width: 100%;
     overflow: hidden;
     position: relative;
-}
-
-.staff-scroll {
-    overflow-x: hidden;
-    position: relative;
-}
-
-.staff-grid {
-    display: flex;
-    gap: 1rem; /* Reduced gap */
-    animation: none; /* Remove default animation */
-}
-
-@keyframes scrollLeft {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-100% / 2));
-    }
-}
-
-.staff-scroll .staff-grid {
-    display: flex;
-    gap: 1rem;
     padding: 1rem 0;
 }
 
-/* Ensure immediate animation start */
+/* Add decorative elements to rows */
+.staff-row-container:nth-child(1)::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20%;
+    transform: rotate(45deg);
+}
+
+.staff-row-container:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+/* Enhanced scroll container */
+.staff-scroll {
+    overflow-x: hidden;
+    position: relative;
+    padding: 1.5rem 0.5rem;
+}
+
+/* Grid layout for staff items */
+.staff-grid {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.5rem;
+    animation-duration: 15s !important;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    will-change: transform;
+}
+
+/* Set appropriate animations */
 .staff-scroll:not(.reverse) .staff-grid {
+    animation-name: scrollLeft;
     transform: translateX(0);
 }
 
 .staff-scroll.reverse .staff-grid {
+    animation-name: scrollRight;
     transform: translateX(calc(-100% / 2));
+}
+
+/* Enhanced animation keyframes */
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100% / 2));
+    }
 }
 
 @keyframes scrollRight {
@@ -74,117 +146,265 @@
     }
 }
 
-
+/* Modernized staff item cards */
 .staff-item {
     flex: 0 0 350px;
-    background: white;
-    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform: translateZ(0);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .staff-item:hover {
-    transform: translateY(-10px);
+    transform: translateY(-16px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
+/* Image container with enhanced visuals */
 .staff-item img {
     width: 100%;
     height: 250px;
     object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: brightness(0.9);
 }
 
+.staff-item:hover img {
+    transform: scale(1.06);
+    filter: brightness(1.05);
+}
+
+/* Add subtle overlay gradient to images */
+.staff-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(to bottom, transparent 70%, rgba(0, 0, 0, 0.6));
+    pointer-events: none;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.staff-item:hover::after {
+    opacity: 0.5;
+}
+
+/* Location labels */
 .staff-item h4 {
-    padding: 1rem 1rem 0.5rem;
+    padding: 1.2rem 1.5rem 0.7rem;
     color: var(--primary-green);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.staff-item:hover h4 {
+    color: #004e1f;
+    transform: translateX(5px);
+}
+
+/* Add accent line under headings */
+.staff-item h4::after {
+    content: '';
+    position: absolute;
+    left: 1.5rem;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--primary-green);
+    transition: width 0.3s ease;
+}
+
+.staff-item:hover h4::after {
+    width: 60px;
 }
 
 .staff-item p {
-    padding: 0 1rem 1rem;
-    color: #666;
-    font-size: 0.9rem;
+    padding: 0 1.5rem 1.5rem;
+    color: #555;
+    font-size: 0.95rem;
     font-style: italic;
 }
 
-@keyframes scrollLeft {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-400px * 4)); /* Width of original set */
-    }
-}
-
-@keyframes scrollRight {
-    0% {
-        transform: translateX(calc(-400px * 4));
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
-
-/* Add pause on hover */
+/* Pause animation on row hover */
 .staff-scroll:hover .staff-grid {
     animation-play-state: paused;
 }
 
-/* Review Card Styling within Staff Showcase */
+/* Enhanced Review Card Styling */
 .staff-item.review-card {
     background: rgba(255, 255, 255, 0.95);
-    padding: 1.5rem;
-    min-width: 300px;
+    padding: 1.8rem;
+    min-width: 350px;
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.8rem;
+    backdrop-filter: blur(5px);
+}
+
+/* Add quote marks to review cards */
+.staff-item.review-card::before {
+    content: '"';
+    position: absolute;
+    top: 0.5rem;
+    right: 1.5rem;
+    font-size: 5rem;
+    font-family: Georgia, serif;
+    color: rgba(0, 78, 31, 0.1);
+    line-height: 1;
 }
 
 .review-card .review-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
 }
 
+/* Enhanced rating stars */
 .review-card .review-stars {
     color: #FFD700;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    display: flex;
+    gap: 2px;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
 }
 
 .review-card .review-text {
     color: #333;
-    font-size: 0.9rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.7;
     font-style: italic;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 0.8rem;
 }
 
 .review-card .review-author {
     color: var(--primary-green);
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.review-card:hover .review-author {
+    color: #004e1f;
 }
 
 .review-card .review-date {
-    color: #666;
-    font-size: 0.8rem;
+    color: #777;
+    font-size: 0.85rem;
+    margin-top: auto;
 }
 
+/* Modernized service tag */
 .review-card .service-tag {
-    background: var(--primary-green);
+    background: linear-gradient(to right, #004e1f, #0f7d43);
     color: white;
-    padding: 0.2rem 0.5rem;
-    border-radius: 12px;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
     font-size: 0.8rem;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: inline-block;
 }
 
+/* Enhanced clickable card */
 .staff-item.review-card.clickable {
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .staff-item.review-card.clickable:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
 }
 
+/* Add subtle hover glow */
+.staff-item:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 0 0 20px rgba(114, 194, 147, 0.2);
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    #staff-showcase {
+        padding: 5rem 1.5rem 3rem;
+    }
+    
+    #staff-showcase h2 {
+        font-size: 2.4rem;
+        margin-bottom: 3rem;
+    }
+    
+    .staff-container {
+        gap: 2.5rem;
+    }
+    
+    .staff-item {
+        flex: 0 0 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    #staff-showcase h2 {
+        font-size: 2.2rem;
+    }
+    
+    .staff-scroll::before,
+    .staff-scroll::after {
+        width: 60px;
+    }
+    
+    .staff-item {
+        flex: 0 0 260px;
+    }
+
+    .staff-grid {
+        animation-duration: 7s !important; /* Even faster on mobile devices */
+    }
+    
+    
+    .staff-item h4 {
+        font-size: 1.2rem;
+        padding: 1rem 1.2rem 0.6rem;
+    }
+    
+    .staff-item img {
+        height: 220px;
+    }
+    
+    .staff-item.review-card {
+        padding: 1.5rem;
+        min-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    #staff-showcase {
+        padding: 4rem 1rem 2.5rem;
+    }
+    
+    #staff-showcase h2 {
+        font-size: 2rem;
+    }
+    
+    .staff-item {
+        flex: 0 0 260px;
+    }
+    
+    .staff-item img {
+        height: 200px;
+    }
+    
+    .staff-item.review-card {
+        min-width: 260px;
+    }
+}
