@@ -459,6 +459,14 @@
                                         <option value="1">1 Star</option>
                                     </select>
                                 </div>
+                                <div class="category-filter">
+                                    <select id="categoryFilter">
+                                        <option value="">All Categories</option>
+                                        <option value="tinting">Tinting</option>
+                                        <option value="ppf">PPF</option>
+                                        <option value="both">Both Services</option>
+                                    </select>
+                                </div>
                                 <div class="search-wrapper">
                                     <input type="text" id="reviewSearch" placeholder="Search reviews...">
                                     <i class="fas fa-search"></i>
@@ -490,6 +498,21 @@
                         <button class="action-btn add-category-btn" onclick="showAddCategoryModal()">
                             <i class="fas fa-plus"></i> Add Category
                         </button>
+
+                        <div class="faq-filter-container">
+                            <div class="filter-group">
+                                <select id="faqCategoryFilter" class="faq-filter">
+                                    <option value="">All Categories</option>
+                                    <!-- Categories will be loaded dynamically -->
+                                </select>
+                            </div>
+                            <div class="search-wrapper">
+                                <div class="search-input-container">
+                                    <i class="fas fa-search search-icon"></i>
+                                    <input type="text" id="faqSearch" placeholder="Search questions..." class="search-input">
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="faq-categories" id="faqManagementContainer">
                             <!-- Categories will be loaded here -->
