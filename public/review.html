@@ -81,6 +81,33 @@
                     <div class="reviews-display">
                         <div class="reviews-header">
                             <h3>Recent Experiences</h3>
+                            
+                            <!-- New Average Rating Component -->
+                            <div class="average-rating-container">
+                                <div class="average-rating-value">
+                                    <span id="averageRatingNumber">0.0</span><span>/5</span>
+                                </div>
+                                <div class="average-rating-stars">
+                                    <div class="stars-background">
+                                      <i class="far fa-star"></i>
+                                      <i class="far fa-star"></i>
+                                      <i class="far fa-star"></i>
+                                      <i class="far fa-star"></i>
+                                      <i class="far fa-star"></i>
+                                    </div>
+                                    <div class="stars-foreground" id="averageRatingStars">
+                                      <i class="fas fa-star"></i>
+                                      <i class="fas fa-star"></i>
+                                      <i class="fas fa-star"></i>
+                                      <i class="fas fa-star"></i>
+                                      <i class="fas fa-star"></i>
+                                    </div>
+                                  </div>
+                                <div class="review-count">
+                                    Based on <span id="reviewCount">0</span> reviews
+                                </div>
+                            </div>
+                            
                             <div class="review-filter">
                                 <label for="starFilter">View:</label>
                                 <select id="starFilter" class="custom-select">
