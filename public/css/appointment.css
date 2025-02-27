@@ -1,56 +1,485 @@
-/* Footer */
-.footer {
-    background: #1E1E1E;
-    padding: 2rem 0;
-    text-align: center;
-    font-family: 'Lato', sans-serif;
+/* Appointment Page Styles */
+:root {
+    --primary-green: #0F553F;
+    --primary-light: #72c293;
+    --gradient-bg: linear-gradient(135deg, #004e1f 0%, #1b6848 50%, #72c293 100%);
+    --text-light: #ffffff;
+    --text-dark: #333333;
+    --text-muted: rgba(255, 255, 255, 0.8);
+    --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --shadow-dark: 0 15px 30px rgba(0, 0, 0, 0.2);
+    --transition: all 0.3s ease;
 }
 
-.footer h2 {
-    font-size: 1.2rem;
-    color: #ffffff;
-    margin-bottom: 1rem;
-    font-weight: normal;
+.container {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
-.footer-social {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 1rem;
-}
-
-.footer-social p {
-    color: #ffffff;
-    font-size: 0.9rem;
+/* Hero Section */
+.appointment-hero {
+    position: relative;
+    min-height: 40vh;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
+    background-image: url('img/people/lecars.png');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    padding: 6rem 2rem;
+    margin-top: 60px;
 }
 
-.footer p {
-    color: #ffffff;
-    font-size: 0.9rem;
-    margin: 0.5rem 0;
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
 }
 
-.footer a {
-    color: #ffffff;
-    text-decoration: none;
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
 }
 
-.footer a:hover {
-    text-decoration: underline;
+.hero-content h1 {
+    font-size: 3.5rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Remove bullet points from dropdown menu */
-.dropdown-menu {
+.hero-content p {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    font-weight: 300;
+}
+
+/* Appointment Section */
+.appointment-section {
+    padding: 5rem 0;
+    background-image: var(--gradient-bg);
+}
+
+.appointment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.section-header {
+    margin-bottom: 2.5rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+    
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+}
+
+/* Service Cards */
+.service-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: var(--transition);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: var(--shadow-dark);
+}
+
+.service-icon {
+    background: var(--primary-light);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    flex-shrink: 0;
+}
+
+.service-content h3 {
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.service-content p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Why Book With Us */
+.why-book {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.why-book h3 {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.why-book h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--primary-light);
+}
+
+.benefits-list {
     list-style: none;
-    margin: 0;
-    padding: 0.5rem;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
 }
 
-.dropdown-menu li {
-    list-style-type: none;
-    margin: 0;
+.benefits-list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-light);
+}
+
+.benefits-list i {
+    color: var(--primary-light);
+    font-size: 1.1rem;
+}
+
+/* Booking Card */
+.booking-card {
+    background: white;
+    border-radius: 10px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-light);
+    position: relative;
+}
+
+.booking-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.booking-header h2 {
+    color: var(--primary-green);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.booking-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Booking Process */
+.booking-process {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.process-step {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-green);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    color: var(--primary-green);
+    margin-bottom: 0.3rem;
+    font-size: 1.1rem;
+}
+
+.step-content p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Agreement Section */
+.agreement-section {
+    margin-bottom: 2rem;
+    background: rgba(15, 85, 63, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.agreement-section h3 {
+    color: var(--primary-green);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.agreement-list {
+    list-style: none;
+    padding: 0;
+}
+
+.agreement-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: #555;
+}
+
+.agreement-list li:last-child {
+    border-bottom: none;
+}
+
+.agreement-list li i {
+    color: var(--primary-green);
+    margin-top: 0.2rem;
+}
+
+/* Book Now Button */
+.book-now-btn {
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 1.2rem 2rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 100%;
+    transition: var(--transition);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.book-now-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: var(--transition);
+}
+
+.book-now-btn:hover {
+    background: #0a4432;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.book-now-btn:hover::before {
+    left: 100%;
+}
+
+/* Testimonial Section */
+.testimonial-section {
+    padding: 5rem 0;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.testimonial-header {
+    margin-bottom: 3rem;
+}
+
+.testimonial-header h2 {
+    color: var(--primary-green);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.testimonial-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.testimonial-carousel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-dark);
+}
+
+.rating {
+    color: #ffd700;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-text {
+    color: #333;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.client-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.client-name {
+    font-weight: 700;
+    color: var(--primary-green);
+    margin-bottom: 0.3rem;
+}
+
+.service-type {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .appointment-grid {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .appointment-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .section-header h2,
+    .booking-header h2 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .appointment-hero {
+        padding: 4rem 1.5rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1.2rem;
+    }
+
+    .appointment-section,
+    .testimonial-section {
+        padding: 3rem 0;
+    }
+
+    .booking-card {
+        padding: 1.5rem;
+    }
+
+    .testimonial-carousel {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .section-header h2,
+    .booking-header h2,
+    .testimonial-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .service-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .service-icon {
+        margin: 0 auto 1rem;
+    }
+
+    .process-step {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .step-number {
+        margin: 0 auto 0.5rem;
+    }
 }
