@@ -58,89 +58,122 @@
 
     <main>
         <section class="review-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/people/toyota_1.jpg');">
+            <div class="hero-overlay"></div>
             <div class="review-hero-content">
-                <h1 class="lato-black">Share Your Experience</h1>
-                <p class="lato-light">Your feedback helps us improve and serve you better</p>
+                <h1 class="lato-black">Customer Experiences</h1>
+                <p class="lato-light">Your feedback drives our excellence in service</p>
+                <div class="hero-decoration">
+                    <div class="line"></div>
+                    <div class="star-icon"><i class="fas fa-star"></i></div>
+                    <div class="line"></div>
+                </div>
             </div>
         </section>
-
+    
         <section class="review-form-section">
-            <div class="review-container">
-
-                <div class="reviews-display">
-                    <h2>Recent Reviews</h2>
-                    <div class="review-filter">
-                        <label for="starFilter">Filter by rating:</label>
-                        <select id="starFilter">
-                            <option value="">All Ratings</option>
-                            <option value="5">5 Stars</option>
-                            <option value="4">4 Stars</option>
-                            <option value="3">3 Stars</option>
-                            <option value="2">2 Stars</option>
-                            <option value="1">1 Star</option>
-                        </select>
-                    </div>
-                    <div class="reviews-grid">
-                        <!-- Example review cards - These would be poplated dynamically -->
-                        <div class="review-card">
-                            <div class="review-header">
-                                <div class="reviewer-info">
-                                    <h3>John Doe</h3>
-                                    <div class="review-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <span class="service-tag">Window Tinting</span>
-                            </div>
-                            <p class="review-text">"Excellent service! The team was professional and the results exceeded my expectations."</p>
-                            <span class="review-date">2 days ago</span>
-                        </div>
-                        <!-- More review cards would be added dynamically -->
-                    </div>
+            <div class="container">
+                <div class="section-header">
+                    <h2>Join Our Community of Satisfied Customers</h2>
+                    <p>Read what others have to say about their experience or share your own story with us</p>
                 </div>
                 
-                <div class="review-form-wrapper">
-                    <h2>Write a Review</h2>
-                    <form id="reviewForm" class="review-form">
-                        <div class="rating-container">
-                            <p>Rate your experience:</p>
-                            <div class="stars">
-                                <i class="far fa-star" data-rating="1"></i>
-                                <i class="far fa-star" data-rating="2"></i>
-                                <i class="far fa-star" data-rating="3"></i>
-                                <i class="far fa-star" data-rating="4"></i>
-                                <i class="far fa-star" data-rating="5"></i>
+                <div class="review-container">
+                    <div class="reviews-display">
+                        <div class="reviews-header">
+                            <h3>Recent Experiences</h3>
+                            <div class="review-filter">
+                                <label for="starFilter">View:</label>
+                                <select id="starFilter" class="custom-select">
+                                    <option value="">All Ratings</option>
+                                    <option value="5">5 Stars</option>
+                                    <option value="4">4 Stars</option>
+                                    <option value="3">3 Stars</option>
+                                    <option value="2">2 Stars</option>
+                                    <option value="1">1 Star</option>
+                                </select>
                             </div>
-                            <input type="hidden" name="rating" id="rating" required>
                         </div>
-
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" readonly>
+                        
+                        <div class="reviews-grid">
+                            <!-- Example review card that will be dynamically populated -->
+                            <div class="review-card">
+                                <div class="review-card-header">
+                                    <div class="reviewer-avatar">JD</div>
+                                    <div class="reviewer-info">
+                                        <h4>John Doe</h4>
+                                        <div class="review-meta">
+                                            <div class="review-stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="review-date">2 days ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="service-badge">Window Tinting</div>
+                                </div>
+                                <div class="review-content">
+                                    <p>"Excellent service! The team was professional and the results exceeded my expectations."</p>
+                                </div>
+                            </div>
+                            <!-- More review cards would be added dynamically -->
                         </div>
-
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" readonly>
+                    </div>
+                    
+                    <div class="review-form-wrapper">
+                        <div class="form-header">
+                            <h3>Share Your Experience</h3>
+                            <p>Your feedback helps us improve our services</p>
                         </div>
-
-                        <div class="form-group">
-                            <select id="serviceType" name="serviceType" required>
-                                <option value="">Select Service Type</option>
-                                <option value="tinting">Window Tinting</option>
-                                <option value="ppf">Paint Protection Film</option>
-                                <option value="both">Both Services</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <textarea id="review" name="review" placeholder="Share your experience with us..." required></textarea>
-                        </div>
-
-                        <button type="submit" class="submit-review-btn">Submit Review</button>
-                    </form>
+                        
+                        <form id="reviewForm" class="review-form">
+                            <div class="rating-container">
+                                <p>How would you rate your experience?</p>
+                                <div class="stars">
+                                    <i class="far fa-star" data-rating="1"></i>
+                                    <i class="far fa-star" data-rating="2"></i>
+                                    <i class="far fa-star" data-rating="3"></i>
+                                    <i class="far fa-star" data-rating="4"></i>
+                                    <i class="far fa-star" data-rating="5"></i>
+                                </div>
+                                <input type="hidden" name="rating" id="rating" required>
+                            </div>
+    
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" id="name" name="name" readonly>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="email">Your Email</label>
+                                    <input type="email" id="email" name="email" readonly>
+                                </div>
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="serviceType">Service Received</label>
+                                <select id="serviceType" name="serviceType" required>
+                                    <option value="">Select Service Type</option>
+                                    <option value="tinting">Window Tinting</option>
+                                    <option value="ppf">Paint Protection Film</option>
+                                    <option value="both">Both Services</option>
+                                </select>
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="review">Your Experience</label>
+                                <textarea id="review" name="review" placeholder="Tell us about your experience with our services..." required></textarea>
+                            </div>
+    
+                            <button type="submit" class="submit-review-btn">
+                                <span>Submit Review</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
