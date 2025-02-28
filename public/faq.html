@@ -57,12 +57,12 @@
         </nav>
     </header>
 
-     <main>
+    <main>
         <section class="faq-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/people/cabahugfamily.jpg');">
             <div class="faq-hero-overlay"></div>
             <div class="faq-hero-content">
-                <h1>Frequently Asked Questions</h1>
-                <p>Find answers to common questions about our services and products</p>
+                <h1 class="lato-black">Frequently Asked Questions</h1>
+                <p class="lato-light">Find answers to common questions about our services and products</p>
                 
                 <div class="faq-search">
                     <div class="search-container">
@@ -70,7 +70,14 @@
                         <input type="text" id="faqSearch" placeholder="Search for questions...">
                     </div>
                 </div>
+                <div class="category-filters">
+                    <div class="filter-container">
+                        <button class="category-filter active" data-category="all">All</button>
+                        <!-- Additional category buttons will be added dynamically -->
+                    </div>
+                </div>
             </div>
+
         </section>
 
         <section class="faq-section">
@@ -78,7 +85,7 @@
                 <!-- Dynamic FAQ content will be loaded here -->
                 <div class="faq-loading">
                     <div class="loading-spinner"></div>
-                    <p>Loading FAQs...</p>
+                    <p class="lato-regular">Loading FAQs...</p>
                 </div>
             </div>
         
@@ -88,11 +95,11 @@
                         <i class="fas fa-question-circle"></i>
                     </div>
                     <div class="cta-content">
-                        <h3>Didn't Find Your Answer?</h3>
-                        <p>Contact our team for personalized assistance with any questions you may have.</p>
+                        <h3 class="lato-bold">Didn't Find Your Answer?</h3>
+                        <p class="lato-light">Contact our team for personalized assistance with any questions you may have.</p>
                         <div class="cta-buttons">
-                            <a href="index.html#contact" class="contact-btn primary">Contact Us</a>
-                            <a href="appointment.html" class="contact-btn secondary">Book Appointment</a>
+                            <a href="index.html#contact" class="contact-btn primary lato-bold">Contact Us</a>
+                            <a href="appointment.html" class="contact-btn secondary lato-bold">Book Appointment</a>
                         </div>
                     </div>
                 </div>
@@ -100,7 +107,7 @@
         </section>
     </main>
 
-     <footer class="site-footer">
+    <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-section">
                 <h3>Business Hours</h3>
@@ -171,7 +178,6 @@
             <a href="/faq" class="fab-item">
                 <p class="lato-bold">FAQ</p>
             </a>
-    
         </div>
     </div>
 </body>
