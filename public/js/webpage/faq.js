@@ -1,13 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
     const faqContainer = document.getElementById('faqContainer');
     const searchInput = document.getElementById('faqSearch');
+    const filterContainer = document.querySelector('.filter-container');
+    let faqData = []; // Store the original FAQ data
+    let activeCategory = 'all'; // Track the currently active category
     
     // Load FAQ data
     async function loadFAQs() {
         try {
             const response = await fetch('/api/faq');
-            const faqData = await response.json();
+            faqData = await response.json();
             
+            // Create category filters
+            createCategoryFilters(faqData);
+            
+            // Render the FAQs
             renderFAQs(faqData);
         } catch (error) {
             console.error('Error loading FAQs:', error);
@@ -19,10 +26,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Create category filter buttons
+    function createCategoryFilters(categories) {
+        // Clear existing filters except "All"
+        const allFilter = filterContainer.querySelector('[data-category="all"]');
+        filterContainer.innerHTML = '';
+        filterContainer.appendChild(allFilter);
+        
+        // Add a button for each category
+        categories.forEach(category => {
+            const button = document.createElement('button');
+            button.className = 'category-filter';
+            button.setAttribute('data-category', category.id);
+            button.textContent = category.name;
+            filterContainer.appendChild(button);
+        });
+        
+        // Add event listeners to category buttons
+        const filterButtons = document.querySelectorAll('.category-filter');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Update active category
+                activeCategory = button.getAttribute('data-category');
+                
+                // Apply filters
+                applyFilters();
+            });
+        });
+    }
+
     // Render FAQ content
     function renderFAQs(categories) {
         faqContainer.innerHTML = categories.map(category => `
-            <div class="faq-category">
+            <div class="faq-category" data-category-id="${category.id}">
                 <h2 class="category-title">${category.name}</h2>
                 ${category.questions.map(q => `
                     <div class="faq-item">
@@ -40,16 +82,26 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `).join('');
 
-        // Reinitialize accordion functionality
+        // Initialize accordion functionality
         initializeAccordions();
     }
 
-    // Search functionality
-    function initializeSearch() {
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const faqItems = document.querySelectorAll('.faq-item');
+    // Apply both category and search filters
+    function applyFilters() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const faqCategories = document.querySelectorAll('.faq-category');
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        // Handle category filtering
+        faqCategories.forEach(category => {
+            const categoryId = category.getAttribute('data-category-id');
+            const shouldShowCategory = activeCategory === 'all' || activeCategory === categoryId;
             
+            category.style.display = shouldShowCategory ? 'block' : 'none';
+        });
+        
+        // Handle search filtering
+        if (searchTerm) {
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question span').textContent.toLowerCase();
                 const answer = item.querySelector('.faq-answer-content').textContent.toLowerCase();
@@ -57,17 +109,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 item.style.display = matches ? 'block' : 'none';
             });
-
+            
             // Show/hide categories based on visible questions
-            document.querySelectorAll('.faq-category').forEach(category => {
-                const hasVisibleQuestions = [...category.querySelectorAll('.faq-item')]
-                    .some(item => item.style.display !== 'none');
-                category.style.display = hasVisibleQuestions ? 'block' : 'none';
+            faqCategories.forEach(category => {
+                if (category.style.display !== 'none') { // Skip already hidden categories
+                    const hasVisibleQuestions = [...category.querySelectorAll('.faq-item')]
+                        .some(item => item.style.display !== 'none');
+                    category.style.display = hasVisibleQuestions ? 'block' : 'none';
+                }
             });
-        });
+        }
     }
 
-    // Accordion functionality
+    // Initialize accordion functionality
     function initializeAccordions() {
         const faqQuestions = document.querySelectorAll('.faq-question');
         
@@ -95,7 +149,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Search functionality
+    searchInput.addEventListener('input', applyFilters);
+
     // Initialize
     loadFAQs();
-    initializeSearch();
 });
