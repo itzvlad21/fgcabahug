@@ -229,35 +229,148 @@ body {
 .error-message,
 .success-message {
     width: 100%;
-    padding: 0.8rem;
-    margin-top: 1rem;
-    border-radius: 4px;
+    padding: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
     text-align: center;
-    font-size: 0.9rem;
-    animation: slideIn 0.3s ease;
-}
-
-.error-message {
-    background-color: #fee2e2;
-    color: #dc2626;
-    border: 1px solid #fecaca;
+    font-size: 1.1rem;
+    animation: slideIn 0.5s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    line-height: 1.5;
 }
 
 .success-message {
     background-color: #dcfce7;
     color: #16a34a;
-    border: 1px solid #bbf7d0;
+    border: 2px solid #bbf7d0;
+    font-weight: 500;
 }
+
+.fade-out { opacity: 0; transition: opacity 0.5s ease; }
 
 @keyframes slideIn {
     from {
-        transform: translateY(-10px);
+        transform: translateY(-20px);
         opacity: 0;
     }
     to {
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+/* Add this new style */
+.verification-icon {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #16a34a;
+}
+
+/* Modal/Popup overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Popup content */
+.popup-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.popup-overlay.active .popup-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Close button */
+.popup-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: #777;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 0.3s ease;
+}
+
+.popup-close:hover {
+    color: #333;
+}
+
+/* Popup icon */
+.popup-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: #16a34a;
+    display: block;
+}
+
+/* Popup title */
+.popup-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: 700;
+}
+
+/* Popup message */
+.popup-message {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+/* Popup footer */
+.popup-footer {
+    margin-top: 2rem;
+}
+
+/* Popup button */
+.popup-button {
+    background-color: #105231;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.popup-button:hover {
+    background-color: #0a3d24;
+    transform: translateY(-2px);
 }
 
 /* Form Scroll Area */
