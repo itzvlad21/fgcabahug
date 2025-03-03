@@ -289,6 +289,34 @@ html {
     right: -50px;
 }
 
+.qr-code-container {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.qr-code-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    background-color: white;
+    transition: transform 0.3s ease;
+}
+
+.qr-code-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .qr-code-image {
+        width: 150px;
+        height: 150px;
+    }
+}
+
 /* Animations */
 @keyframes fadeIn {
     from {
