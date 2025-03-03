@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FG Cabahug Trading - Connect With Us</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/socialqr.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <script src="js/user_login.js"></script>
+    <script src="js/script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="img/people/logo.ico">
+</head>
+<body>
+    <div class="social-qr-container">
+        <!-- Decorative elements -->
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        
+        <div class="content-wrapper">
+            <div class="social-logo-container">
+                <div class="logo-glow"></div>
+                <img src="img/people/logo_green.png" alt="FG Cabahug Trading Logo" class="social-logo">
+            </div>
+            
+            <h1 class="social-title">FG Cabahug Trading</h1>
+            <p class="social-subtitle">Premium Tint & PPF Experts | BF Resort Village</p>
+            
+            <!-- New - Social Media Icons after subtitle -->
+            <div class="subtitle-social-icons">
+                <a href="https://www.facebook.com/fgcabahugtradingph" target="_blank" class="subtitle-social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/fgcabahug/" target="_blank" class="subtitle-social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@fgcabahugtrading" target="_blank" class="subtitle-social-icon">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+            
+            <div class="subtitle-divider"></div>
+            
+            <div class="social-buttons">
+                <a href="https://fgcabahugtrading.com" class="social-btn">
+                    <div class="social-btn-text">Official Website</div>
+                    <span class="social-btn-icon"><i class="fas fa-globe"></i></span>
+                </a>
+                
+                <a href="https://www.facebook.com/fgcabahugtradingph" target="_blank" class="social-btn">
+                    <div class="social-btn-text">Follow on Facebook</div>
+                    <span class="social-btn-icon"><i class="fab fa-facebook-f"></i></span>
+                </a>
+                
+                <a href="https://www.instagram.com/fgcabahug/" target="_blank" class="social-btn">
+                    <div class="social-btn-text">Follow on Instagram</div>
+                    <span class="social-btn-icon"><i class="fab fa-instagram"></i></span>
+                </a>
+                
+                <a href="https://www.tiktok.com/@fgcabahugtrading" target="_blank" class="social-btn">
+                    <div class="social-btn-text">Follow on TikTok</div>
+                    <span class="social-btn-icon"><i class="fab fa-tiktok"></i></span>
+                </a>
+            </div>
+            
+            <div class="qr-info">
+                <p>Scan this QR code to access our social links anytime</p>
+            </div>
+            
+            <div class="social-footer">
+                &copy; F.G Cabahug Trading - <a href="#">Privacy Policy</a> - <a href="#">Legal Notices</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track QR code scan if analytics is set up
+            console.log('QR code page loaded');
+            
+            // Add click tracking and enhanced interaction
+            const socialButtons = document.querySelectorAll('.social-btn');
+            socialButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const platform = this.querySelector('.social-btn-text').textContent.trim();
+                    console.log(`Clicked on ${platform}`);
+                    
+                    // Add click effect
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
