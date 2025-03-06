@@ -18,6 +18,18 @@
     padding: 0 2rem;
 }
 
+/* Remove bullet points from dropdown menu */
+.dropdown-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.dropdown-menu li {
+    list-style-type: none;
+    margin: 0;
+}
+
 /* Hero Section */
 .appointment-hero {
     position: relative;
