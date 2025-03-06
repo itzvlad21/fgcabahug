@@ -1,6 +1,6 @@
 /* Modern Staff and Achievements Showcase */
 #staff-showcase {
-    padding: 6rem 2rem 4rem;
+    padding: 3rem 0rem 3rem; /* Reduced top/bottom padding and removed left/right padding */
     background: linear-gradient(135deg, #004e1f 0%, #72c293 100%);
     position: relative;
     overflow: hidden;
@@ -36,7 +36,7 @@
     color: #ffffff;
     text-align: center;
     font-size: 2.8rem;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.5rem; /* Reduced margin */
     position: relative;
     z-index: 5;
     letter-spacing: 1px;
@@ -60,10 +60,10 @@
 .staff-container {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 1.5rem; /* Reduced gap between rows from 3rem to 1.5rem */
     position: relative;
     z-index: 5;
-    max-width: 1400px;
+    max-width: 2000px;
     margin: 0 auto;
 }
 
@@ -71,7 +71,7 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    padding: 1rem 0;
+    padding: 0.5rem 0; /* Reduced padding from 1rem to 0.5rem */
 }
 
 /* Add decorative elements to rows */
@@ -102,14 +102,14 @@
 .staff-scroll {
     overflow-x: hidden;
     position: relative;
-    padding: 1.5rem 0.5rem;
+    padding: 1rem 0; /* Reduced padding from 1.5rem to 1rem */
 }
 
 /* Grid layout for staff items */
 .staff-grid {
     display: flex;
-    gap: 1.5rem;
-    padding: 0.5rem;
+    gap: 1rem; /* Reduced gap from 1.5rem to 1rem */
+    padding: 0.25rem; /* Reduced padding */
     animation-duration: 15s !important;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
@@ -152,7 +152,7 @@
     background: rgba(255, 255, 255, 0.95);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Reduced shadow */
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     transform: translateZ(0);
     position: relative;
@@ -161,7 +161,7 @@
 
 .staff-item:hover {
     transform: translateY(-16px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Reduced shadow on hover */
 }
 
 /* Image container with enhanced visuals */
@@ -198,7 +198,7 @@
 
 /* Location labels */
 .staff-item h4 {
-    padding: 1.2rem 1.5rem 0.7rem;
+    padding: 1rem 1.2rem 0.6rem; /* Reduced padding */
     color: var(--primary-green);
     font-size: 1.3rem;
     position: relative;
@@ -214,7 +214,7 @@
 .staff-item h4::after {
     content: '';
     position: absolute;
-    left: 1.5rem;
+    left: 1.2rem; /* Reduced from 1.5rem */
     bottom: 0;
     width: 40px;
     height: 2px;
@@ -227,7 +227,7 @@
 }
 
 .staff-item p {
-    padding: 0 1.5rem 1.5rem;
+    padding: 0 1.2rem 1.2rem; /* Reduced padding */
     color: #555;
     font-size: 0.95rem;
     font-style: italic;
@@ -241,13 +241,14 @@
 /* Enhanced Review Card Styling */
 .staff-item.review-card {
     background: rgba(255, 255, 255, 0.95);
-    padding: 1.8rem;
+    padding: 1.5rem; /* Reduced padding from 1.8rem */
     min-width: 350px;
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.6rem; /* Reduced gap */
     backdrop-filter: blur(5px);
+    box-shadow: none; /* Removed shadow for review cards */
 }
 
 /* Add quote marks to review cards */
@@ -285,7 +286,7 @@
     font-style: italic;
     position: relative;
     z-index: 2;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.6rem; /* Reduced from 0.8rem */
 }
 
 .review-card .review-author {
@@ -325,27 +326,27 @@
 
 .staff-item.review-card.clickable:hover {
     transform: translateY(-12px) scale(1.03);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    box-shadow: none; /* Removed shadow on hover */
 }
 
-/* Add subtle hover glow */
+/* Remove subtle hover glow */
 .staff-item:hover {
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 0 0 20px rgba(114, 194, 147, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Simplified and reduced shadow */
 }
 
 /* Responsive styles */
 @media (max-width: 992px) {
     #staff-showcase {
-        padding: 5rem 1.5rem 3rem;
+        padding: 3.5rem 0 2.5rem; /* Reduced padding */
     }
     
     #staff-showcase h2 {
         font-size: 2.4rem;
-        margin-bottom: 3rem;
+        margin-bottom: 2.5rem; /* Reduced margin */
     }
     
     .staff-container {
-        gap: 2.5rem;
+        gap: 1.5rem; /* Reduced gap */
     }
     
     .staff-item {
@@ -374,7 +375,7 @@
     
     .staff-item h4 {
         font-size: 1.2rem;
-        padding: 1rem 1.2rem 0.6rem;
+        padding: 0.8rem 1rem 0.5rem; /* Further reduced padding */
     }
     
     .staff-item img {
@@ -382,14 +383,14 @@
     }
     
     .staff-item.review-card {
-        padding: 1.5rem;
+        padding: 1.2rem; /* Reduced from 1.5rem */
         min-width: 280px;
     }
 }
 
 @media (max-width: 480px) {
     #staff-showcase {
-        padding: 4rem 1rem 2.5rem;
+        padding: 3rem 0 2rem; /* Reduced padding */
     }
     
     #staff-showcase h2 {
@@ -406,5 +407,6 @@
     
     .staff-item.review-card {
         min-width: 260px;
+        padding: 1rem; /* Further reduced padding */
     }
 }
