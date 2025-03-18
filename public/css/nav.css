@@ -429,3 +429,119 @@
     color: black;
     transform: scale(1.1);
 }
+
+/* Exclusive button with text alternation and black outline */
+.exclusive-link {
+    background-color: #cc0000; /* Strong red background */
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 0.6rem 1.2rem;
+    margin-right: 1rem;
+    border-radius: 5px;
+    position: relative;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    display: inline-block;
+    width: 90px; /* Adjust for text width */
+    height: 40px; /* Fixed height for button consistency */
+    text-align: center;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    background-image: linear-gradient(135deg, #cc0000, #ff0000);
+}
+
+/* Text alternation with pseudo-elements */
+.exclusive-link::before,
+.exclusive-link::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.exclusive-link::before {
+    content: "Exclusive";
+    animation: textSwap1 6s infinite;
+    transform-origin: center;
+}
+
+.exclusive-link::after {
+    content: "3M Pro";
+    animation: textSwap2 6s infinite;
+    transform-origin: center;
+}
+
+/* Text swap animations */
+@keyframes textSwap1 {
+    0%, 45% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+        filter: blur(0);
+    }
+    50%, 95% {
+        opacity: 0;
+        transform: translateY(-15px) rotateX(90deg);
+        filter: blur(0); /* Removed blur for cleaner text */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes textSwap2 {
+    0%, 45% {
+        opacity: 0;
+        transform: translateY(15px) rotateX(-90deg);
+        filter: blur(0); /* Removed blur for cleaner text */
+    }
+    50%, 95% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(15px) rotateX(-90deg);
+        filter: blur(0);
+    }
+}
+
+/* Button hover effects */
+.exclusive-link:hover {
+    background-image: linear-gradient(135deg, #ff0000, #cc0000);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Subtle pulsing effect for the button */
+
+.exclusive-link {
+    animation: buttonPulse 3s infinite;
+}
+
+/* Active state for button */
+.exclusive-link:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .exclusive-link {
+        width: 80px; /* Adjust for smaller screens */
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        height: 36px;
+        margin-right: 0.5rem;
+    }
+}
+
