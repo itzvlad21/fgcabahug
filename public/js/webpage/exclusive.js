@@ -66,23 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(video);
     }
 
-    // Floating Action Button
-    const fabMain = document.querySelector('.fab-main');
-    const fabMenu = document.querySelector('.fab-menu');
-    
-    fabMain.addEventListener('click', () => {
-        fabMenu.classList.toggle('active');
-        fabMain.classList.toggle('active');
-    });
-
-    // Close FAB menu when clicking elsewhere
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.fab-container')) {
-            fabMenu.classList.remove('active');
-            fabMain.classList.remove('active');
-        }
-    });
-
     // Animate elements on scroll
     function animateOnScroll() {
         const animatedElements = document.querySelectorAll('.section-header, .product-card, .gallery-item, .badge-item, .certification-content');
