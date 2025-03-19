@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update navigation to show username with dropdown
         const navRight = document.querySelector('.nav-right');
         navRight.innerHTML = `
+        <a href="exclusive.html" class="exclusive-link"></a>
             <div class="user-dropdown">
                 <button class="user-dropdown-btn">${currentUser.username} <i class="fas fa-chevron-down"></i></button>
                 <div class="user-dropdown-content">
