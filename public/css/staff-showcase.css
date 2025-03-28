@@ -240,27 +240,30 @@
 
 /* Enhanced Review Card Styling */
 .staff-item.review-card {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 1.5rem; /* Reduced padding from 1.8rem */
+    background: #ffffff; /* Solid white background instead of rgba with opacity */
+    padding: 1.8rem;
     min-width: 350px;
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem; /* Reduced gap */
-    backdrop-filter: blur(5px);
-    box-shadow: none; /* Removed shadow for review cards */
+    gap: 0.8rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Keep outer shadow */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Remove any background gradients if present */
+    background-image: none;
 }
 
 /* Add quote marks to review cards */
-.staff-item.review-card::before {
-    content: '"';
-    position: absolute;
-    top: 0.5rem;
-    right: 1.5rem;
-    font-size: 5rem;
-    font-family: Georgia, serif;
-    color: rgba(0, 78, 31, 0.1);
-    line-height: 1;
+.staff-item.review-card::before,
+.staff-item.review-card::after {
+    display: none;
+}
+
+.staff-item.review-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    border-color: var(--accent-green, #72C293);
+    background: #ffffff; /* Keep background solid white even on hover */
 }
 
 .review-card .review-header {
